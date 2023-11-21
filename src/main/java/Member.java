@@ -8,9 +8,11 @@ public class Member  {
         private String dateJoined;
         private int annualFee;
         private boolean isActive;
+        private int memberID;
+        private boolean isCompetitor;
 
 
-        public Member (String name,String surName, int age, String email, int phoneNumber, String dateOfBirth, String dateJoined,int annualFee, boolean isActive) {
+        public Member (String name,String surName, int age, String email, int phoneNumber, String dateOfBirth, String dateJoined,int annualFee, boolean isActive, int memberID, boolean isCompetitor) {
             this.name = name;
             this.surName = surName;
             this.age = age;
@@ -19,9 +21,10 @@ public class Member  {
             this.dateOfBirth = dateOfBirth;
             this.dateJoined = dateJoined;
             this.isActive = isActive;
+            this.memberID = memberID;
+            this.isCompetitor = isCompetitor;
+
         }
-
-
 
 
     }
