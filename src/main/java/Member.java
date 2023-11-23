@@ -1,5 +1,8 @@
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Member  {
      private String name;
         private String surName;
@@ -34,10 +37,19 @@ public class Member  {
 
 
     public int calculateAge() {
-        LocalDate birthDate = LocalDate.parse(dateOfBirth, Database.MemberDatabase.DATE_FORMATTER);
-        LocalDate currentDate = LocalDate.now();
-        Period period = Period.between(birthDate, currentDate);
-        return period.getYears();
+        String[] dateFormats = {"dd/MM/yyyy", "d/M/yyyy"};
+
+        for (String format : dateFormats) {
+            try {
+                LocalDate birthDate = LocalDate.parse(dateOfBirth, DateTimeFormatter.ofPattern(format));
+                LocalDate currentDate = LocalDate.now();
+                Period period = Period.between(birthDate, currentDate);
+                return period.getYears();
+            } catch (DateTimeParseException e) {
+            }
+        }
+        System.out.println("Kunne ikke beregne alder, da forkert format blev indtastet");
+        return -1;
     }
 public String toString() {
             return "Fornavn: " + name + "\n" +
