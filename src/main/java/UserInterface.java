@@ -1,4 +1,5 @@
 import java.util.*;
+
 public class UserInterface {
     Scanner input = new Scanner(System.in);
     private final Controller controller;
@@ -7,7 +8,12 @@ public class UserInterface {
     public UserInterface() {
         this.controller = new Controller();
     }
+
+
     public void startProgram() {
+
+        controller.addMember("Laura", "Madsen", "lauramadsen@gmail.com", 62376453, "15/02/2003", "23/11/2023", true, true);
+
         while (uiIsRunning) {
             showMainMenu();
             switch (input.nextInt()) {
@@ -18,8 +24,13 @@ public class UserInterface {
             }
         }
     }
-    private void showMainMenu(){
-        System.out.println("Velkommen!");
+
+    private void showMainMenu() {
+        System.out.println("""
+                Velkommen til svømmeklubben Delfinen!
+                1. Tilføj nyt medlem
+                2. Vis alle medlemmer
+                9. Afslut programmet""");
     }
 
     private void addMember() {
@@ -33,6 +44,7 @@ public class UserInterface {
         System.out.println("Hvad er deres telefon nr.?");
         int phoneNumber = input.nextInt();
         System.out.println("Hvornår har de fødselsdag? (dd/mm/yyyy)");
+        input.nextLine();
         String dateOfBirth = input.nextLine();
         System.out.println("Hvornår er de blevet et medlem? (dd/mm/yyyy)");
         String dateJoined = input.nextLine();
@@ -40,7 +52,7 @@ public class UserInterface {
         boolean isActive = input.next().equalsIgnoreCase("j");
         System.out.println("Er det en konkurrance svømmer?(j/n)");
         boolean isCompetitor = input.next().equalsIgnoreCase("j");
-
+        controller.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor);
     }
 
     private void showMembers() {
