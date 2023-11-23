@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Member  {
      private String name;
         private String surName;
@@ -8,26 +13,56 @@ public class Member  {
         private String dateJoined;
         private int annualFee;
         private boolean isActive;
-        private String memberID;
+
+    private String memberID;
         private boolean isCompetitor;
 
 
-        public Member (String name,String surName, int age, String email, int phoneNumber, String dateOfBirth, String dateJoined,int annualFee, boolean isActive, String memberID, boolean isCompetitor) {
+        public Member (String name,String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, String memberID) {
             this.name = name;
             this.surName = surName;
-            this.age = age;
             this.email = email;
             this.phoneNumber = phoneNumber;
             this.dateOfBirth = dateOfBirth;
             this.dateJoined = dateJoined;
-            this.annualFee = annualFee;
             this.isActive = isActive;
-            this.memberID = memberID;
             this.isCompetitor = isCompetitor;
+            this.memberID = memberID;
 
         }
 
+    public String getMemberID() {
+        return memberID;
+    }
 
+
+    public int calculateAge() {
+        String[] dateFormats = {"dd/MM/yyyy", "d/M/yyyy"};
+
+        for (String format : dateFormats) {
+            try {
+                LocalDate birthDate = LocalDate.parse(dateOfBirth, DateTimeFormatter.ofPattern(format));
+                LocalDate currentDate = LocalDate.now();
+                Period period = Period.between(birthDate, currentDate);
+                return period.getYears();
+            } catch (DateTimeParseException e) {
+            }
+        }
+        System.out.println("Kunne ikke beregne alder, da forkert format blev indtastet");
+        return -1;
+    }
+public String toString() {
+            return "Fornavn: " + name + "\n" +
+                    "Efternavn: " + surName + "\n" +
+                    "Alder: " + calculateAge() + "\n" +
+                    "Email: " + email + "\n" +
+                    "Telefon nummer: " + phoneNumber + "\n" +
+                    "Blev medlem d. " + dateJoined + "\n" +
+                    "Er det et aktivt medlem? " + isActive + "\n" +
+                    "Er det en konkurrance svømmer? " + isCompetitor + "\n" +
+                    "Medlems ID: " + memberID;
+
+}
     }
 
 
