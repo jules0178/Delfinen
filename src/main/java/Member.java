@@ -10,11 +10,12 @@ public class Member  {
         private String dateJoined;
         private int annualFee;
         private boolean isActive;
-        private String memberID;
+
+    private String memberID;
         private boolean isCompetitor;
 
 
-        public Member (String name,String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor) {
+        public Member (String name,String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, String memberID) {
             this.name = name;
             this.surName = surName;
             this.email = email;
@@ -23,8 +24,15 @@ public class Member  {
             this.dateJoined = dateJoined;
             this.isActive = isActive;
             this.isCompetitor = isCompetitor;
+            this.memberID = memberID;
 
         }
+
+    public String getMemberID() {
+        return memberID;
+    }
+
+
     public int calculateAge() {
         LocalDate birthDate = LocalDate.parse(dateOfBirth, Database.MemberDatabase.DATE_FORMATTER);
         LocalDate currentDate = LocalDate.now();
@@ -34,7 +42,7 @@ public class Member  {
 public String toString() {
             return "Fornavn: " + name + "\n" +
                     "Efternavn: " + surName + "\n" +
-                    "Alder: " + age + "\n" +
+                    "Alder: " + calculateAge() + "\n" +
                     "Email: " + email + "\n" +
                     "Telefon nummer: " + phoneNumber + "\n" +
                     "Blev medlem d. " + dateJoined + "\n" +
