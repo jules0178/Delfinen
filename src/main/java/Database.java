@@ -3,9 +3,8 @@ import java.time.format.DateTimeFormatter;
 public class Database {
 
     public class MemberDatabase {
-        public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     }
-    private ArrayList<Member> membersArrayList = new ArrayList<>(1);
+    private final ArrayList<Member> membersArrayList = new ArrayList<>(1);
 
     //method to automatically assign an ID to new members
     public String generateMemberID(String name, String surName) {
