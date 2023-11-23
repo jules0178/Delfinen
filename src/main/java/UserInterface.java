@@ -5,7 +5,21 @@ public class UserInterface {
     boolean uiIsRunning = true;
     public void startProgram() {
         while (uiIsRunning) {
+            showMainMenu();
+            switch (input.nextInt()) {
+                case 9 -> exitProgram();
+
+            }
         }
+    }
+    private void showMainMenu(){
+        System.out.println("Velkommen!");
+    }
+
+
+    private void exitProgram() {
+        uiIsRunning = false;
+        System.out.println("Slukker program. Hav en god dag!");
     }
 
 }
