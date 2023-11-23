@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.Period;
 public class Member  {
      private String name;
         private String surName;
@@ -26,8 +28,24 @@ public class Member  {
             this.isCompetitor = isCompetitor;
 
         }
+    public int calculateAge() {
+        LocalDate birthDate = LocalDate.parse(dateOfBirth, Database.MemberDatabase.DATE_FORMATTER);
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(birthDate, currentDate);
+        return period.getYears();
+    }
+public String toString() {
+            return "Fornavn: " + name + "\n" +
+                    "Efternavn: " + surName + "\n" +
+                    "Alder: " + age + "\n" +
+                    "Email: " + email + "\n" +
+                    "Telefon nummer: " + phoneNumber + "\n" +
+                    "Blev medlem d. " + dateJoined + "\n" +
+                    "Er det et aktivt medlem? " + isActive + "\n" +
+                    "Er det en konkurrance svømmer? " + isCompetitor + "\n" +
+                    "Medlems ID: " + memberID;
 
-
+}
     }
 
 

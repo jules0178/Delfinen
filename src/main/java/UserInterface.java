@@ -12,6 +12,7 @@ public class UserInterface {
             showMainMenu();
             switch (input.nextInt()) {
                 case 1 -> addMember();
+                case 2 -> showMembers();
                 case 9 -> exitProgram();
 
             }
@@ -40,6 +41,10 @@ public class UserInterface {
         System.out.println("Er det en konkurrance svømmer?(j/n)");
         boolean isCompetitor = input.next().equalsIgnoreCase("j");
 
+    }
+
+    private void showMembers() {
+        System.out.println(controller.showMembers());
     }
 
     private void exitProgram() {
