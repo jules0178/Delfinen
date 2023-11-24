@@ -3,33 +3,33 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Member  {
-     private String name;
-        private String surName;
-        private int age;
-        private String email;
-        private int phoneNumber;
-        private String dateOfBirth;
-        private String dateJoined;
-        private int annualFee;
-        private boolean isActive;
+public class Member {
+    private String name;
+    private String surName;
+    private int age;
+    private String email;
+    private int phoneNumber;
+    private String dateOfBirth;
+    private String dateJoined;
+    private int annualFee;
+    private boolean isActive;
 
     private String memberID;
-        private boolean isCompetitor;
+    private boolean isCompetitor;
 
 
-        public Member (String name,String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, String memberID) {
-            this.name = name;
-            this.surName = surName;
-            this.email = email;
-            this.phoneNumber = phoneNumber;
-            this.dateOfBirth = dateOfBirth;
-            this.dateJoined = dateJoined;
-            this.isActive = isActive;
-            this.isCompetitor = isCompetitor;
-            this.memberID = memberID;
+    public Member(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, String memberID) {
+        this.name = name;
+        this.surName = surName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.dateJoined = dateJoined;
+        this.isActive = isActive;
+        this.isCompetitor = isCompetitor;
+        this.memberID = memberID;
 
-        }
+    }
 
     public String getMemberID() {
         return memberID;
@@ -51,19 +51,20 @@ public class Member  {
         System.out.println("Kunne ikke beregne alder, da forkert format blev indtastet");
         return -1;
     }
-public String toString() {
-            return "Fornavn: " + name + "\n" +
-                    "Efternavn: " + surName + "\n" +
-                    "Alder: " + calculateAge() + "\n" +
-                    "Email: " + email + "\n" +
-                    "Telefon nummer: " + phoneNumber + "\n" +
-                    "Blev medlem d. " + dateJoined + "\n" +
-                    "Er det et aktivt medlem? " + isActive + "\n" +
-                    "Er det en konkurrance svømmer? " + isCompetitor + "\n" +
-                    "Medlems ID: " + memberID;
 
-}
+    public String toString() {
+        return "Fornavn: " + name + "\n" +
+                "Efternavn: " + surName + "\n" +
+                "Alder: " + calculateAge() + "\n" +
+                "Email: " + email + "\n" +
+                "Telefon nummer: " + phoneNumber + "\n" +
+                "Blev medlem d. " + dateJoined + "\n" +
+                "Er det et aktivt medlem? " + isActive + "\n" +
+                "Er det en konkurrance svømmer? " + isCompetitor + "\n" +
+                "Medlems ID: " + memberID;
+
     }
+}
 
 
 
