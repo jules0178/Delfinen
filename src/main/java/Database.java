@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
+
+
 public class Database {
 
     public class MemberDatabase {
@@ -20,11 +22,11 @@ public class Database {
 
         return prefix + countString;
     }
-   public void addMember(String name,String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor) {
+    public void addMember(String name,String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor) {
         String memberID = generateMemberID(name, surName);
         membersArrayList.add(0, new Member(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, memberID));
     }
-public String showMembers() {
+    public String showMembers() {
         StringBuilder stringBuilder = new StringBuilder();
         if (membersArrayList.isEmpty()) {
             return "Der er ikke nogen medlemmer i databasen,";
@@ -39,6 +41,7 @@ public String showMembers() {
             }
             return stringBuilder.toString();
         }
-}
+
+    }
 
 }

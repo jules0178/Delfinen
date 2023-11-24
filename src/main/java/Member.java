@@ -3,7 +3,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Member {
+public class Member  {
     private String name;
     private String surName;
     private int age;
@@ -18,7 +18,7 @@ public class Member {
     private boolean isCompetitor;
 
 
-    public Member(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, String memberID) {
+    public Member (String name,String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, String memberID) {
         this.name = name;
         this.surName = surName;
         this.email = email;
@@ -35,6 +35,50 @@ public class Member {
         return memberID;
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public String getSurName() {
+        return surName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getDateJoined() {
+        return dateJoined;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public boolean isCompetitor() {
+        return isCompetitor;
+    }
+    public void setAnnualFee(Member member) {
+        int seniorFee = 1600;
+        int juniorFee = 1000;
+        int passiveFee = 500;
+        int fee = 0;
+        if (member.isActive==false) {
+            fee = passiveFee;
+        }
+        else if (age < 18) {
+            fee = juniorFee;
+        } else if (age > 18) {
+            fee = seniorFee;
+
+    }
 
     public int calculateAge() {
         String[] dateFormats = {"dd/MM/yyyy", "d/M/yyyy"};
@@ -51,7 +95,6 @@ public class Member {
         System.out.println("Kunne ikke beregne alder, da forkert format blev indtastet");
         return -1;
     }
-
     public String toString() {
         return "Fornavn: " + name + "\n" +
                 "Efternavn: " + surName + "\n" +
@@ -65,7 +108,3 @@ public class Member {
 
     }
 }
-
-
-
-
