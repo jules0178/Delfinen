@@ -1,12 +1,11 @@
 import java.io.IOException;
 import java.util.ArrayList;
 public class Database {
-
-
-
     Filehandler filehandler = new Filehandler();
     private final ArrayList<Member> membersArrayList = new ArrayList<>(1);
-
+    public ArrayList<Member> getMembersArrayList() {
+        return membersArrayList;
+    }
     public Database() throws IOException {
         setMembersArrayList(filehandler.loadData());
     }
