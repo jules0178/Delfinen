@@ -8,18 +8,16 @@ public class Database {
     }
     private final ArrayList<Member> membersArrayList = new ArrayList<>(1);
 
-    //method to automatically assign an ID to new members
     public String generateMemberID(String name, String surName) {
         String prefix = name.substring(0, 2).toLowerCase() + surName.substring(0, 2).toLowerCase();
         int count = 1;
 
-        // Find the count for the current prefix
         for (Member member : membersArrayList) {
             if (member.getMemberID().startsWith(prefix)) {
                 count++;
             }
         }
-        // Format the count to a four-digit string
+
         String countString = String.format("%04d", count);
 
         return prefix + countString;
