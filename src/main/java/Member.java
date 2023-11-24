@@ -65,7 +65,24 @@ public class Member  {
     public boolean isCompetitor() {
         return isCompetitor;
     }
+    public void setAnnualFee(Member member) {
+        int seniorFee = 1600;
+        int juniorFee = 1000;
+        int passiveFee = 500;
+        int fee = 0;
+        if (member.isActive==false) {
+            fee = passiveFee;
+        }
+        else if (age < 18) {
+            fee = juniorFee;
+        } else if (age > 18) {
+            fee = seniorFee;
 
+        } else if (age > 60) {
+            fee = seniorFee/100 * 75;
+        }
+        annualFee = fee;
+    }
     public int calculateAge() {
         String[] dateFormats = {"dd/MM/yyyy", "d/M/yyyy"};
 
