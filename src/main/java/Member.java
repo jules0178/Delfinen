@@ -65,6 +65,7 @@ public class Member  {
     public boolean isCompetitor() {
         return isCompetitor;
     }
+
     public void setAnnualFee(Member member) {
         int seniorFee = 1600;
         int juniorFee = 1000;
@@ -78,6 +79,10 @@ public class Member  {
         } else if (age > 18) {
             fee = seniorFee;
 
+        } else if (age > 60) {
+            fee = seniorFee/100 * 75;
+        }
+        annualFee = fee;
     }
 
     public int calculateAge() {
