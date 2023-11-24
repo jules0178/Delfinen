@@ -1,12 +1,8 @@
 import java.io.IOException;
 import java.util.ArrayList;
-import java.time.format.DateTimeFormatter;
-
-
 public class Database {
 
-    public class MemberDatabase {
-    }
+
 
     Filehandler filehandler = new Filehandler();
     private final ArrayList<Member> membersArrayList = new ArrayList<>(1);
@@ -54,7 +50,7 @@ public class Database {
                     ~~~~~~~~~~~~~~~~~~~~~
                     """);
             for (Member member : membersArrayList) {
-                stringBuilder.append("\n" + member + "\n--------------------");
+                stringBuilder.append("\n").append(member).append("\n--------------------\n");
             }
             return stringBuilder.toString();
         }
