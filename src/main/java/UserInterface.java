@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 
 public class UserInterface {
@@ -5,13 +6,13 @@ public class UserInterface {
     private final Controller controller;
     boolean uiIsRunning = true;
 
-    public UserInterface() {
+    public UserInterface() throws IOException {
         this.controller = new Controller();
     }
 
     public void startProgram() {
 
-        controller.addMember("Laura", "Madsen", "lauramadsen@gmail.com", 62376453, "15/02/2003", "23/11/2023", true, true);
+        /* controller.addMember("Laura", "Madsen", "lauramadsen@gmail.com", 62376453, "15/02/2003", "23/11/2023", true, true); */
 
         boolean uiIsRunning = true;
         while (uiIsRunning) {
@@ -44,6 +45,7 @@ public class UserInterface {
             }
         }
     }
+
     private void showMainMenu() {
         System.out.println();
         System.out.println("Velkommen til SVØMMEKLUBBEN DELFINEN.");
@@ -69,6 +71,7 @@ public class UserInterface {
 
         System.out.println("Hvad er deres telefon nr.?");
         int phoneNumber = input.nextInt();
+        input.nextLine(); //linje til scanner bug
 
         System.out.println("Hvornår har de fødselsdag? (dd/mm/yyyy)");
         String dateOfBirth = input.nextLine();
@@ -83,13 +86,20 @@ public class UserInterface {
         boolean isCompetitor = input.next().equalsIgnoreCase("j");
 
         controller.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor);
+        saveMembers();
     }
 
     private void showMembers() {
         System.out.println(controller.showMembers());
     }
 
+    private void saveMembers() {
+        controller.saveMembers();
+        System.out.println("Alle ændringer er blevet gemt");
+    }
+
     private void exitProgram() {
+        saveMembers();
         uiIsRunning = false;
         System.out.println("Programmet afsluttes. Hav en god dag!");
     }

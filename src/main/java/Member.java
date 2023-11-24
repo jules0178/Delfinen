@@ -58,11 +58,11 @@ public class Member  {
         return dateJoined;
     }
 
-    public boolean isActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public boolean isCompetitor() {
+    public boolean getIsCompetitor() {
         return isCompetitor;
     }
 
