@@ -12,7 +12,6 @@ public class UserInterface {
 
     public void startProgram() {
 
-        /* controller.addMember("Laura", "Madsen", "lauramadsen@gmail.com", 62376453, "15/02/2003", "23/11/2023", true, true); */
 
         boolean uiIsRunning = true;
         while (uiIsRunning) {
