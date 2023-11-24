@@ -35,6 +35,36 @@ public class Member  {
         return memberID;
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public String getSurName() {
+        return surName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getDateJoined() {
+        return dateJoined;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public boolean isCompetitor() {
+        return isCompetitor;
+    }
 
     public int calculateAge() {
         String[] dateFormats = {"dd/MM/yyyy", "d/M/yyyy"};

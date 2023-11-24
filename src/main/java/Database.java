@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
+
+
 public class Database {
 
     public class MemberDatabase {
@@ -41,6 +43,7 @@ public class Database {
             }
             return stringBuilder.toString();
         }
+
     }
 
 }
