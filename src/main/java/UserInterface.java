@@ -10,51 +10,25 @@ public class UserInterface {
         this.controller = new Controller();
     }
 
+    // Tilføj flere cases når der bliver lavet metoder til edit, delete, search osv.
     public void startProgram() {
-
-
-        boolean uiIsRunning = true;
         while (uiIsRunning) {
             showMainMenu();
-            try {
-                int choice = input.nextInt();
-                switch (choice) {
-                    case 1:
-                        addMember();
-                        break;
-                    case 2:
-                        showMembers();
-                        break;
-                    case 3:
-                        // Implementer logik for search for a member
-                        break;
-                    case 4:
-                        // Implementer logik for edit a member
-                        break;
-                    case 9:
-                        exitProgram();
-                        uiIsRunning = false;
-                        break;
-                    default:
-                        System.out.println("Ugyldigt input. Indtast en gyldig handling (1, 2, 3, 4 eller 9).");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Ugyldigt input. Indtast en gyldig handling (1, 2, 3, 4 eller 9).");
-                input.nextLine(); // Clear the invalid input from the scanner
+            switch (takeUserInput()) {
+                case 1 -> addMember();
+                case 2 -> showMembers();
+                case 9 -> exitProgram();
+                default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
         }
     }
 
     private void showMainMenu() {
-        System.out.println();
-        System.out.println("Velkommen til SVØMMEKLUBBEN DELFINEN.");
-        System.out.println();
-        System.out.println("1. Tilføj nyt medlem");
-        System.out.println("2. Vis liste over alle medlemmer");
-        System.out.println("3. Søg efter et medlem");
-        System.out.println("4. Rediger et medlem");
-        System.out.println("9. Afslut");
-        System.out.print("Vælg en handling: ");
+        System.out.println("""
+                Velkommen til SVØMMEKLUBBEN DELFINEN.
+                1. Tilføj nyt medlem
+                2. Vis liste over alle medlemmer
+                9. Afslut""");
     }
 
     private void addMember() {
@@ -92,9 +66,23 @@ public class UserInterface {
         System.out.println(controller.showMembers());
     }
 
+
     private void saveMembers() {
         controller.saveMembers();
         System.out.println("Alle ændringer er blevet gemt");
+    }
+
+    private int takeUserInput() {
+        String inputString = input.nextLine();
+        int inputInt = 0;
+
+        try {
+            inputInt = Integer.parseInt(inputString);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input! Try again:");
+            inputInt = takeUserInput();
+        }
+        return inputInt;
     }
 
     private void exitProgram() {
