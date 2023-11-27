@@ -15,21 +15,44 @@ public class UserInterface {
         while (uiIsRunning) {
             showMainMenu();
             switch (takeUserInput()) {
-                case 1 -> addMember();
+                case 1 -> showChairManMenu();
                 case 2 -> showMembers();
                 case 9 -> exitProgram();
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
         }
     }
-
     private void showMainMenu() {
         System.out.println("""
+                Velkommen til svømmeklubben Delfinen!
+                1. Menu til formanden
+                2. Menu til kasereren
+                3. Menu til træneren
+                9. Afslut
+                """);
+    }
+    private void showChairManMenu() {
+        boolean chairmanMenuRunning = true;
+
+        while (chairmanMenuRunning) {
+            System.out.println("""
                 Velkommen til SVØMMEKLUBBEN DELFINEN.
                 1. Tilføj nyt medlem
                 2. Vis liste over alle medlemmer
-                9. Afslut""");
+                3. Rediger oplysninger for et medlem
+                4. Slet et medllem
+                5. Søg på medlemmer
+                9. Gå tilbage til hovedmenuen""");
+
+            switch (takeUserInput()) {
+                case 1 -> addMember();
+                case 2 -> showMembers();
+                case 9 -> chairmanMenuRunning = false;
+                default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
+            }
+        }
     }
+
 
     private void addMember() {
         input.nextLine();
