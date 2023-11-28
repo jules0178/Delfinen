@@ -44,13 +44,14 @@ public class UserInterface {
                 1. Tilføj nyt medlem
                 2. Vis liste over alle medlemmer
                 3. Rediger oplysninger for et medlem (Funktion ikke oprettet endnu)
-                4. Slet et medllem (Funktion ikke oprettet endnu)
+                4. Slet et medlem 
                 5. Søg på medlemmer (Funktion ikke oprettet endnu)
                 9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
                 case 1 -> addMember();
                 case 2 -> showMembers();
+                case 4 -> deleteMember();
                 case 9 -> chairmanMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
@@ -134,7 +135,6 @@ public class UserInterface {
     private void deleteMember(){
         System.out.println();
         System.out.println("Indtast medlemmets ID, som du vil slette:");
-        input.nextLine();
         String memberID = input.nextLine();
 
         System.out.println("Er du sikker på, at du vil slette dette medlem? (ja/nej) = (j/n)");
