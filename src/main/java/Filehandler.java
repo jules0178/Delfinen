@@ -64,6 +64,18 @@ public class Filehandler {
                 }
             return resultsList;
      }
+     public void saveResults(ArrayList<Result> resultsList){
+        try {
+            PrintStream output = new PrintStream("Results");
+            for (Result result : resultsList) {
+                output.println(result.getEventName() + ";" + result.getDate() + ";" + result.getStyle() + ";" +
+                        result.getTime() + ";" + result.getSwimmerID() + ";" + result.isPractice());
+            }
+            output.close();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+     }
 }
 
 

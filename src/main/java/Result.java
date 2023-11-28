@@ -18,22 +18,40 @@ public class Result {
 
     }
 
+    public String getEventName() {
+        return eventName;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public SwimStyle getStyle() {
+        return swimStyle;
+    }
+
+    public String getSwimmerID() {
+        return swimmerID;
+    }
+
+    public boolean isPractice() {
+        return isPractice;
+    }
+
+    public CompetitionTime getTime() {
+        return time;
+    }
+
     public enum SwimStyle {
         BUTTERFLY,
         CRAWL,
         BACK_CRAWL,
         BREASTSTROKE;
     }
-    public SwimStyle getStyle() {
-        return swimStyle;
-    }
     @Override
     public String toString() {
         return "I " + eventName + " : d. " + date + " : " + time + " i " + swimStyle;
     }
 
-    public CompetitionTime getTime() {
-        return time;
-    }
 
 }
