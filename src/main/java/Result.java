@@ -23,9 +23,16 @@ public class Result {
         BREASTSTROKE;
 
     }
-
+    public SwimStyle getStyle() {
+        return swimStyle;
+    }
     @Override
     public String toString() {
-        return "In " + eventName + " : " + date + " time set " + time + " in " + swimStyle;
+        return "I " + eventName + " : d. " + date + " : " + time + " i " + swimStyle;
     }
+
+    public CompetitionTime getTime() {
+        return time;
+    }
+
 }
