@@ -113,6 +113,7 @@ public class Member  {
         return "Fornavn: " + name + "\n" +
                 "Efternavn: " + surName + "\n" +
                 "Alder: " + calculateAge() + "\n" +
+                "Fødselsdag: " + dateOfBirth + "\n" +
                 "Email: " + email + "\n" +
                 "Telefon nummer: " + phoneNumber + "\n" +
                 "Blev medlem d. " + dateJoined + "\n" +
