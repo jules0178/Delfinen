@@ -31,6 +31,9 @@ public class UserInterface {
                     case 4:
                         // Implementer logik for edit a member
                         break;
+                    case 5:
+                        deleteMember();
+                        break;
                     case 9:
                         exitProgram();
                         uiIsRunning = false;
@@ -53,6 +56,7 @@ public class UserInterface {
         System.out.println("2. Vis liste over alle medlemmer");
         System.out.println("3. Søg efter et medlem");
         System.out.println("4. Rediger et medlem");
+        System.out.println("5. Slette et medlem");
         System.out.println("9. Afslut");
         System.out.print("Vælg en handling: ");
     }
@@ -96,11 +100,26 @@ public class UserInterface {
         controller.saveMembers();
         System.out.println("Alle ændringer er blevet gemt");
     }
+    private void deleteMember(){
+        System.out.println();
+        System.out.println("Indtast medlemmets ID, som du vil slette:");
+        input.nextLine();
+        String memberID = input.nextLine();
+
+        System.out.println("Er du sikker på, at du vil slette dette medlem? (ja/nej) = (j/n)");
+        String confirmation = input.nextLine();
+
+        if (confirmation.equalsIgnoreCase("ja") || confirmation.equalsIgnoreCase("j")) {
+            controller.deleteMember(memberID);
+        } else {
+            System.out.println("Handling afbrudt.");
+        }
+    }
+
 
     private void exitProgram() {
         saveMembers();
         uiIsRunning = false;
         System.out.println("Programmet afsluttes. Hav en god dag!");
     }
-
 }
