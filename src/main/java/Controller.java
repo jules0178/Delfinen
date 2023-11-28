@@ -10,7 +10,23 @@ public class Controller {
         this.memberDatabase = new Database();
         this.juniorTeam = new Team("Juniors");
         this.seniorTeam = new Team("Seniors");
-       // assignSwimmersToTeams();
+        assignSwimmersToTeams();
+    }
+
+    private void assignSwimmersToTeams() {
+        for (Member member : memberDatabase.getMembersArrayList()) {
+            if (member instanceof Swimmer) {
+                Swimmer swimmer = (Swimmer) member;
+                int age = swimmer.calculateAge();
+                if (age < 18) {
+                    swimmer.setTeam(juniorTeam);
+                    juniorTeam.addMember(swimmer);
+                } else {
+                    swimmer.setTeam(seniorTeam);
+                    seniorTeam.addMember(swimmer);
+                }
+            }
+        }
     }
    /* private void assignSwimmersToTeams() {
         for ( Member swimmer  : memberDatabase.getMembersArrayList()) {
@@ -23,7 +39,7 @@ public class Controller {
                 seniorTeam.addMember(swimmer);
             }
         }
-    } */
+    }*/
 
     public void addMember(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor) {
         memberDatabase.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor);
