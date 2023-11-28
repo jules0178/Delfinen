@@ -5,13 +5,15 @@ public class Result {
     private final LocalDate date;
     private final SwimStyle swimStyle;
     private final CompetitionTime time;
+    private final String swimmerID;
     private final boolean isPractice;
 
-    public Result(String eventName, LocalDate date, SwimStyle swimStyle, CompetitionTime time, boolean isPractice){
+    public Result(String eventName, LocalDate date, SwimStyle swimStyle, CompetitionTime time, String swimmerID, boolean isPractice){
         this.eventName = eventName;
         this.date = date;
         this.swimStyle = swimStyle;
         this.time = time;
+        this.swimmerID = swimmerID;
         this.isPractice = isPractice;
 
     }
@@ -21,7 +23,6 @@ public class Result {
         CRAWL,
         BACK_CRAWL,
         BREASTSTROKE;
-
     }
     public SwimStyle getStyle() {
         return swimStyle;
