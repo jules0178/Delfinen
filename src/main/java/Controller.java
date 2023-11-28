@@ -12,6 +12,7 @@ public class Controller {
         this.seniorTeam = new Team("Seniors");
         assignSwimmersToTeams();
     }
+
     private void assignSwimmersToTeams() {
         for (Member member : memberDatabase.getMembersArrayList()) {
             if (member instanceof Swimmer) {
