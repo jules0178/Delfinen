@@ -11,8 +11,6 @@ public class UserInterface {
     }
 
     public void startProgram() {
-
-
         boolean uiIsRunning = true;
         while (uiIsRunning) {
             showMainMenu();
