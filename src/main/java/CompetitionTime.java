@@ -12,9 +12,6 @@ public class CompetitionTime implements Comparable<CompetitionTime> {
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
-    public int getMinutes() {
-        return minutes;
-    }
 
     public void setSeconds(int seconds) {
         if (seconds >= 0 && seconds < 60) {
@@ -44,5 +41,15 @@ public class CompetitionTime implements Comparable<CompetitionTime> {
     @Override
     public String toString() {
         return String.format("%d:%02d.%02d", minutes, seconds, hundredths);
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+    public int getSeconds() {
+        return seconds;
+    }
+    public int getHundredths() {
+        return hundredths;
     }
 }
