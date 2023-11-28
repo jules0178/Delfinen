@@ -53,7 +53,20 @@ public class Database {
             }
             return stringBuilder.toString();
         }
-
     }
 
-}
+        //Metode til at finde medlem baseret på ID
+        public Member findMemberByID(String MemberID) {
+            for (Member member : membersArrayList) {
+                if (member.getMemberID().equals(MemberID)) {
+                    return member;
+                }
+            }
+            return null; // Returnerer null hvis medlem ikke findes
+        }
+        // Metode til at fjerne et medlem fra databasen
+        public void removeMember(Member member) {
+            membersArrayList.remove(member);
+
+        }
+    }

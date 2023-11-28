@@ -14,16 +14,19 @@ public class UserInterface {
     public void startProgram() {
         while (uiIsRunning) {
             showMainMenu();
+
             switch (takeUserInput()) {
                 case 1 -> chairmanMenu();
                 case 2 -> treasurerMenu();
                 case 3 -> coachMenu();
                 case 9 -> exitProgram();
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
+
             }
         }
     }
     private void showMainMenu() {
+
         System.out.println("""
                 Velkommen til svømmeklubben Delfinen!
                 1. Menu til formanden
@@ -68,6 +71,7 @@ public class UserInterface {
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
         }
+
     }
 
     private void coachMenu() {
@@ -127,6 +131,22 @@ public class UserInterface {
         controller.saveMembers();
         System.out.println("Alle ændringer er blevet gemt");
     }
+    private void deleteMember(){
+        System.out.println();
+        System.out.println("Indtast medlemmets ID, som du vil slette:");
+        input.nextLine();
+        String memberID = input.nextLine();
+
+        System.out.println("Er du sikker på, at du vil slette dette medlem? (ja/nej) = (j/n)");
+        String confirmation = input.nextLine();
+
+        if (confirmation.equalsIgnoreCase("ja") || confirmation.equalsIgnoreCase("j")) {
+            controller.deleteMember(memberID);
+        } else {
+            System.out.println("Handling afbrudt.");
+        }
+    }
+
 
     private int takeUserInput() {
         String inputString = input.nextLine();
@@ -146,5 +166,4 @@ public class UserInterface {
         uiIsRunning = false;
         System.out.println("Programmet afsluttes. Hav en god dag!");
     }
-
 }

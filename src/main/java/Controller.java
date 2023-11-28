@@ -29,6 +29,7 @@ public class Controller {
         }
     }
 
+
     public void addMember(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor) {
         memberDatabase.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor);
     }
@@ -41,5 +42,12 @@ public class Controller {
     public void saveMembers() {
         memberDatabase.saveMembers();
     }
-
+    public void deleteMember(String memberID){
+        Member memberToDelete = memberDatabase.findMemberByID(memberID);
+        if (memberToDelete !=null){
+            memberDatabase.removeMember(memberToDelete);
+            System.out.println();
+            System.out.println("Medlem med ID:" + memberID + ". Medlem er slettet med succes!");
+        }
+    }
 }
