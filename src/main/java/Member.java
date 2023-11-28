@@ -30,9 +30,16 @@ public class Member  {
         this.memberID = memberID;
 
     }
+    public int getAnnualFee() {
+        return annualFee;
+    }
 
     public String getMemberID() {
         return memberID;
+    }
+
+    public int getAge() {
+        return age;
     }
 
     public String getName(){
@@ -66,24 +73,26 @@ public class Member  {
         return isCompetitor;
     }
 
-    public void setAnnualFee(Member member) {
+    public int setAnnualFee(Member member) {
         int seniorFee = 1600;
         int juniorFee = 1000;
         int passiveFee = 500;
         int fee = 0;
-        if (member.isActive==false) {
+        age = member.calculateAge();
+        if (!member.isActive) {
             fee = passiveFee;
         }
         else if (age < 18) {
             fee = juniorFee;
-        } else if (age > 18) {
+        } else if (age > 18 && age < 60) {
             fee = seniorFee;
 
-        } else if (age > 60) {
+        } else {
             fee = seniorFee/100 * 75;
         }
-        annualFee = fee;
+      return annualFee = fee;
     }
+
 
     public int calculateAge() {
         String[] dateFormats = {"dd/MM/yyyy", "d/M/yyyy"};
@@ -104,6 +113,7 @@ public class Member  {
         return "Fornavn: " + name + "\n" +
                 "Efternavn: " + surName + "\n" +
                 "Alder: " + calculateAge() + "\n" +
+                "Fødselsdag: " + dateOfBirth + "\n" +
                 "Email: " + email + "\n" +
                 "Telefon nummer: " + phoneNumber + "\n" +
                 "Blev medlem d. " + dateJoined + "\n" +

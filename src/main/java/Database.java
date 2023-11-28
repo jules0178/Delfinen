@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+
 public class Database {
     Filehandler filehandler = new Filehandler();
     private final ArrayList<Member> membersArrayList = new ArrayList<>(1);
@@ -53,7 +54,17 @@ public class Database {
             }
             return stringBuilder.toString();
         }
-
     }
+        public Member findMemberByID(String MemberID) {
+            for (Member member : membersArrayList) {
+                if (member.getMemberID().equals(MemberID)) {
+                    return member;
+                }
+            }
+            return null;
+        }
+        public void removeMember(Member member) {
+            membersArrayList.remove(member);
 
-}
+        }
+    }
