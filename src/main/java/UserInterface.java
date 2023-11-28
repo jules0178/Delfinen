@@ -10,7 +10,6 @@ public class UserInterface {
         this.controller = new Controller();
     }
 
-    // Tilføj flere cases når der bliver lavet metoder til edit, delete, search osv.
     public void startProgram() {
         while (uiIsRunning) {
             showMainMenu();
@@ -93,7 +92,6 @@ public class UserInterface {
 
 
     private void addMember() {
-        input.nextLine();
         System.out.println("Hvad er fornavnet på det nye medlem?");
         String name = input.nextLine();
 

@@ -47,7 +47,7 @@ public class Controller {
         if (memberToDelete !=null){
             memberDatabase.removeMember(memberToDelete);
             System.out.println();
-            System.out.println("Medlem med ID:" + memberID + ". Medlem er slettet med succes!");
+            System.out.println("Medlem med ID:" + memberID + ". Medlem er slettet med succes!\n");
         }
     }
 }
