@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.time.LocalDate;
-import java.util.EnumSet;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Filehandler {
@@ -48,19 +47,19 @@ public class Filehandler {
             String line = scanner.nextLine();
             String[] parts = line.split(";");
 
-            String[] timeParts = parts[3].split("[:.]");
+            String[] timeParts = parts[4].split("[:.]");
             int minutes = Integer.parseInt(timeParts[0]);
             int seconds = Integer.parseInt(timeParts[1]);
             int hundredths = Integer.parseInt(timeParts[2]);
 
             CompetitionTime competitionTime = new CompetitionTime(minutes, seconds, hundredths);
-            resultsList.add(new Result(parts[0],
-                    LocalDate.parse(parts[1]),
-                    Enum.valueOf(Result.SwimStyle.class, parts[2].toUpperCase()),
-                    competitionTime,
-                    parts[4],
-                    Boolean.parseBoolean(parts[5])));
 
+            resultsList.add(new Result(parts[0],
+                    parts[1],
+                    LocalDate.parse(parts[2]),
+                    Enum.valueOf(Result.SwimStyle.class, parts[3].toUpperCase()),
+                    competitionTime,
+                    Boolean.parseBoolean(parts[5])));
                 }
             return resultsList;
      }
@@ -68,8 +67,8 @@ public class Filehandler {
         try {
             PrintStream output = new PrintStream("Results");
             for (Result result : resultsList) {
-                output.println(result.getEventName() + ";" + result.getDate() + ";" + result.getStyle() + ";" +
-                        result.getTime() + ";" + result.getSwimmerID() + ";" + result.isPractice());
+                output.println(result.getMemberID() + ";" + result.getEventName() + ";" + result.getDate() + ";" + result.getStyle() + ";" +
+                        result.getTime() + ";" +  result.isPractice());
             }
             output.close();
         }catch (IOException e) {
@@ -77,10 +76,3 @@ public class Filehandler {
         }
      }
 }
-
-
-
-
-
-
-

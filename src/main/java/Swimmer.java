@@ -5,7 +5,6 @@ import java.util.List;
 public class Swimmer extends Member {
 
     public List<Result> results;
-
     public List<Result> practice;
     public Team team;
 
@@ -51,5 +50,4 @@ public class Swimmer extends Member {
         }
         return personalBest;
     }
-
 }

@@ -7,6 +7,7 @@ public class Coach extends Member {
         super(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, memberID);
     }
 
+
     public void displayCompetitionStats(Swimmer swimmer){
         List<Result> resultsList = swimmer.getResults();
         for (Result results : resultsList) {

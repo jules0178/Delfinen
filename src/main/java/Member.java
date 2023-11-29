@@ -13,7 +13,6 @@ public class Member  {
     private String dateJoined;
     private int annualFee;
     private boolean isActive;
-
     private String memberID;
     private boolean isCompetitor;
 

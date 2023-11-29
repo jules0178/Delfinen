@@ -1,19 +1,19 @@
 import java.time.LocalDate;
 
 public class Result {
-    private final String eventName;
-    private final LocalDate date;
-    private final SwimStyle swimStyle;
-    private final CompetitionTime time;
-    private final String swimmerID;
-    private final boolean isPractice;
+    private String memberID;
+    private String eventName;
+    private LocalDate date;
+    private SwimStyle swimStyle;
+    private CompetitionTime time;
+    private boolean isPractice;
 
-    public Result(String eventName, LocalDate date, SwimStyle swimStyle, CompetitionTime time, String swimmerID, boolean isPractice){
+    public Result(String memberID,  String eventName, LocalDate date, SwimStyle swimStyle, CompetitionTime time, boolean isPractice){
+        this.memberID = memberID;
         this.eventName = eventName;
         this.date = date;
         this.swimStyle = swimStyle;
         this.time = time;
-        this.swimmerID = swimmerID;
         this.isPractice = isPractice;
 
     }
@@ -21,25 +21,45 @@ public class Result {
     public String getEventName() {
         return eventName;
     }
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
 
     public LocalDate getDate() {
         return date;
     }
-
+    public void setDate(LocalDate date){
+        this.date = date;
+    }
     public SwimStyle getStyle() {
         return swimStyle;
     }
-
-    public String getSwimmerID() {
-        return swimmerID;
+    public void setSwimStyle(SwimStyle swimStyle) {
+        this.swimStyle = swimStyle;
+    }
+    public String getMemberID() {
+        return memberID;
+    }
+    public void setMemberID(String memberID){
+        this.memberID = memberID;
     }
 
     public boolean isPractice() {
         return isPractice;
     }
+    public void setPractice(boolean isPractice) {
+        this.isPractice = true;
+    }
+    public void setIsNotPractice(boolean isPractice) {
+        this.isPractice = false;
+    }
 
     public CompetitionTime getTime() {
         return time;
+    }
+
+    public void setTime(int minutes, int seconds, int hundredths){
+        this.time = time;
     }
 
     public enum SwimStyle {
@@ -47,6 +67,9 @@ public class Result {
         CRAWL,
         BACK_CRAWL,
         BREASTSTROKE;
+    }
+    public void setSwimstyle(SwimStyle swimStyle) {
+        this.swimStyle = swimStyle;
     }
     @Override
     public String toString() {
