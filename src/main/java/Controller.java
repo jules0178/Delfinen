@@ -62,18 +62,6 @@ public class Controller {
             System.out.println("Member is not a Swimmer. Cannot add result.");
         }
     }
-   /* public void addResult(String memberID, Result result) {
-        Swimmer swimmer = (Swimmer) database.findMemberByID(memberID);
-        List<Result> results = swimmer.getResults();
-        List<Result> practice = swimmer.getPractice();
-
-            if (result.getMemberID().equalsIgnoreCase(memberID) && !result.isPractice()) {
-                results.add(result);
-            } else if (result.getMemberID().equalsIgnoreCase(memberID) && result.isPractice()) {
-                practice.add(result);
-            }
-        }
-*/
 
 
     public void addMember(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor) {
@@ -87,6 +75,10 @@ public class Controller {
     public void saveMembers() {
         database.saveMembers();
     }
+    public void saveResults() {
+        database.saveResults();
+    }
+
     public void deleteMember(String memberID){
         Member memberToDelete = database.findMemberByID(memberID);
         if (memberToDelete !=null){

@@ -138,6 +138,7 @@ public class UserInterface {
 
         CompetitionTime time = new CompetitionTime(minutes, seconds, hundredths);
         controller.addResult(medlemsID, new Result(medlemsID, eventName, date, swimStyle, time, false));
+        saveResults();
     }
 
     private void selectMember() {
@@ -186,6 +187,10 @@ public class UserInterface {
     private void saveMembers() {
         controller.saveMembers();
         System.out.println("Alle ændringer er blevet gemt");
+    }
+    private void saveResults() {
+        controller.saveResults();
+        System.out.println("Alle resultater er gemt");
     }
     private void deleteMember(){
         System.out.println();
