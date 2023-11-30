@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class UserInterface {
@@ -80,16 +81,48 @@ public class UserInterface {
         while (coachMenuRunning) {
             System.out.println("""
                     Velkommen til SVØMMEKLUBBEN DELFINEN
-                    1. Se top 5 svæmmere (Funktion ikke oprettet endnu)
+                    1. Se top 5 svømmere (Funktion ikke oprettet endnu)
+                    2. Tilføj stævne resultat til en svømmer.
                     9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
+                case 2 -> System.out.println("Indtast medlemsID");
+
                 case 9 -> coachMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
         }
     }
 
+    private void addNewResult() {
+
+        System.out.println("Indtast medlemsID for svømmeren");
+        String medlemsID = input.nextLine();
+
+        System.out.println("Indtast titel på stævnet");
+        String eventName = input.nextLine();
+
+        System.out.println("Indtast dato for stævnet");
+        LocalDate date = LocalDate.parse(input.nextLine());
+
+        System.out.println("Vælg disciplin");
+        Result.SwimStyle swimStyle = Result.SwimStyle.valueOf(input.nextLine());
+
+        System.out.println("Indtast minutter");
+        int minutes = input.nextInt();;
+        input.nextLine();
+
+        System.out.println("Indtast sekunder");
+        int seconds = input.nextInt();;
+        input.nextLine();
+
+        System.out.println("Indtast hundrededele ");
+        int hundredths = input.nextInt();;
+        input.nextLine();
+
+        CompetitionTime time = new CompetitionTime(minutes, seconds, hundredths);
+        controller.addResult(medlemsID, new Result(medlemsID,eventName, date, swimStyle, time, false) );
+    }
 
     private void addMember() {
         System.out.println("Hvad er fornavnet på det nye medlem?");

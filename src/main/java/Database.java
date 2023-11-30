@@ -1,14 +1,20 @@
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Database {
     Filehandler filehandler = new Filehandler();
-    private final ArrayList<Member> membersArrayList = new ArrayList<>(1);
+    private final ArrayList<Member> membersArrayList = new ArrayList<>();
+    private final ArrayList<Result> resultList = new ArrayList<>();
     public ArrayList<Member> getMembersArrayList() {
         return membersArrayList;
     }
+    public ArrayList<Result> getResultList() {
+        return resultList;
+    }
     public Database() throws IOException {
         setMembersArrayList(filehandler.loadData());
+        setResultList(filehandler.loadResults());
     }
 
     public String generateMemberID(String name, String surName) {
@@ -39,6 +45,19 @@ public class Database {
         filehandler.saveMembers(membersArrayList);
     }
 
+    public void addResult(String memberID, String eventName, LocalDate date, Result.SwimStyle swimsStyle, CompetitionTime time, boolean isPractice) {
+
+        resultList.add(new Result(memberID, eventName, date, swimsStyle, time, isPractice));
+    }
+
+    public void setResultList(ArrayList<Result> list) {
+        resultList.addAll(list);
+    }
+
+    public void saveResults() {
+        filehandler.saveResults(resultList);
+    }
+
     public String showMembers() {
         StringBuilder stringBuilder = new StringBuilder();
         if (membersArrayList.isEmpty()) {
@@ -55,9 +74,9 @@ public class Database {
             return stringBuilder.toString();
         }
     }
-        public Member findMemberByID(String MemberID) {
+        public Member findMemberByID(String memberID) {
             for (Member member : membersArrayList) {
-                if (member.getMemberID().equals(MemberID)) {
+                if (member.getMemberID().equals(memberID)) {
                     return member;
                 }
             }
