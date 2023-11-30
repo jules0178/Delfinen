@@ -30,6 +30,7 @@ public class Database {
         return prefix + countString;
     }
 
+    //TODO Vi skal finde en måde at tage højde for inherited class frem for med boolean
     public void addMember(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor) {
         String memberID = generateMemberID(name, surName);
 
