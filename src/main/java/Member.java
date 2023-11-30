@@ -9,7 +9,9 @@ public class Member  {
     private int age;
     private String email;
     private int phoneNumber;
+    //TODO refaktoreres til LocalDate;
     private String dateOfBirth;
+    //TODO refaktoreres til LocalDate;
     private String dateJoined;
     private int annualFee;
     private boolean isActive;
@@ -72,7 +74,7 @@ public class Member  {
         return isCompetitor;
     }
 
-    public int setAnnualFee(Member member) {
+    public int getAnnualFee(Member member) {
         int seniorFee = 1600;
         int juniorFee = 1000;
         int passiveFee = 500;
@@ -108,6 +110,9 @@ public class Member  {
         System.out.println("Kunne ikke beregne alder, da forkert format blev indtastet");
         return -1;
     }
+
+
+
     public String toString() {
         return "Fornavn: " + name + "\n" +
                 "Efternavn: " + surName + "\n" +

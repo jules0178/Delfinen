@@ -1,23 +1,23 @@
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.util.List;
 
 public class Controller {
-    private final Database memberDatabase;
-    private final Database resultsDatabase;
+    private final Database database;
     private final Team juniorTeam;
     private final Team seniorTeam;
 
     public Controller() throws IOException {
-        this.memberDatabase = new Database();
-        this.resultsDatabase = new Database();
+        this.database = new Database();
         this.juniorTeam = new Team("Juniors");
         this.seniorTeam = new Team("Seniors");
         assignSwimmersToTeams();
     }
 
+    public Member findMemberByID(String memberID) {
+        return database.findMemberByID(memberID);
+    }
     private void assignSwimmersToTeams() {
-        for (Member member : memberDatabase.getMembersArrayList()) {
+        for (Member member : database.getMembersArrayList()) {
             if (member instanceof Swimmer) {
                 Swimmer swimmer = (Swimmer) member;
                 int age = swimmer.calculateAge();
@@ -32,11 +32,11 @@ public class Controller {
         }
     }
     public void assignResults(String memberID) {
-        Swimmer swimmer = (Swimmer) memberDatabase.findMemberByID(memberID);
+        Swimmer swimmer = (Swimmer) database.findMemberByID(memberID);
         List<Result> results = swimmer.getResults();
         List<Result> practice = swimmer.getPractice();
 
-        for (Result res : resultsDatabase.getResultList()) {
+        for (Result res : database.getResultList()) {
             if(res.getMemberID().equalsIgnoreCase(memberID) && !res.isPractice()){
                 results.add(res);
             } else if (res.getMemberID().equalsIgnoreCase(memberID) && res.isPractice()) {
@@ -47,7 +47,7 @@ public class Controller {
     }
 
     public void addResult(String memberID, Result result) {
-        Swimmer swimmer = (Swimmer) memberDatabase.findMemberByID(memberID);
+        Swimmer swimmer = (Swimmer) database.findMemberByID(memberID);
         List<Result> results = swimmer.getResults();
         List<Result> practice = swimmer.getPractice();
 
@@ -61,20 +61,20 @@ public class Controller {
 
 
     public void addMember(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor) {
-        memberDatabase.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor);
+        database.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor);
     }
 
     public String showMembers() {
-        return memberDatabase.showMembers();
+        return database.showMembers();
     }
 
     public void saveMembers() {
-        memberDatabase.saveMembers();
+        database.saveMembers();
     }
     public void deleteMember(String memberID){
-        Member memberToDelete = memberDatabase.findMemberByID(memberID);
+        Member memberToDelete = database.findMemberByID(memberID);
         if (memberToDelete !=null){
-            memberDatabase.removeMember(memberToDelete);
+            database.removeMember(memberToDelete);
             System.out.println();
             System.out.println("Medlem med ID:" + memberID + ". Medlem er slettet.\n");
         }
