@@ -63,10 +63,21 @@ public class Result {
     }
 
     public enum SwimStyle {
-        BUTTERFLY,
-        CRAWL,
-        BACK_CRAWL,
-        BREASTSTROKE;
+        BUTTERFLY("Butterfly"),
+        CRAWL("Crawl"),
+        BACK_CRAWL("Ryg crawl"),
+        BREASTSTROKE("Brystsvømmning");
+
+        private String discipline;
+        SwimStyle(String discipline) {
+            this.discipline = discipline;
+        }
+        public String getDiscipline() {
+            return discipline;
+        }
+        public class EnumSwitch {
+
+        }
     }
     public void setSwimstyle(SwimStyle swimStyle) {
         this.swimStyle = swimStyle;

@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class UserInterface {
@@ -21,7 +22,6 @@ public class UserInterface {
                 case 3 -> coachMenu();
                 case 9 -> exitProgram();
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
-
             }
         }
     }
@@ -32,8 +32,7 @@ public class UserInterface {
                 1. Menu til formanden
                 2. Menu til kasereren
                 3. Menu til træneren
-                9. Afslut
-                """);
+                9. Afslut""");
     }
     private void chairmanMenu() {
         boolean chairmanMenuRunning = true;
@@ -65,9 +64,11 @@ public class UserInterface {
             System.out.println("""
                     Velkommen til SVØMMEKLUBBEN DELFINEN
                     1. Se forventet indkomst i år (Funktion ikke oprettet endnu)
+                    2. Se kontingent for enkelt medlem
                     9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
+                case 2 -> selectMember();
                 case 9 -> treasurerMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
@@ -86,8 +87,7 @@ public class UserInterface {
                     9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
-                case 2 -> System.out.println("Indtast medlemsID");
-
+                case 2 ->  addNewResult();
                 case 9 -> coachMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
@@ -95,6 +95,7 @@ public class UserInterface {
     }
 
     private void addNewResult() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         System.out.println("Indtast medlemsID for svømmeren");
         String medlemsID = input.nextLine();
@@ -103,26 +104,50 @@ public class UserInterface {
         String eventName = input.nextLine();
 
         System.out.println("Indtast dato for stævnet");
-        LocalDate date = LocalDate.parse(input.nextLine());
+        LocalDate date = LocalDate.parse(input.nextLine(), formatter);
 
         System.out.println("Vælg disciplin");
-        Result.SwimStyle swimStyle = Result.SwimStyle.valueOf(input.nextLine());
+
+        for (Result.SwimStyle swimStyle : Result.SwimStyle.values()) {
+            System.out.println(swimStyle);
+        }
+        String userInput = input.nextLine().toUpperCase();
+        Result.SwimStyle styleChoice = null;
+        Result.SwimStyle swimStyle = styleChoice;
+        try {
+            styleChoice = Result.SwimStyle.valueOf(userInput);
+            System.out.println("Du har valgt: " + styleChoice);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Disciplinen findes ikke");
+        }
 
         System.out.println("Indtast minutter");
-        int minutes = input.nextInt();;
+        int minutes = input.nextInt();
+
         input.nextLine();
 
         System.out.println("Indtast sekunder");
-        int seconds = input.nextInt();;
+        int seconds = input.nextInt();
+
         input.nextLine();
 
         System.out.println("Indtast hundrededele ");
-        int hundredths = input.nextInt();;
+        int hundredths = input.nextInt();
+
         input.nextLine();
 
         CompetitionTime time = new CompetitionTime(minutes, seconds, hundredths);
-        controller.addResult(medlemsID, new Result(medlemsID,eventName, date, swimStyle, time, false) );
+        controller.addResult(medlemsID, new Result(medlemsID, eventName, date, swimStyle, time, false));
+        saveResults();
     }
+
+    private void selectMember() {
+        System.out.println("Indtast medlemsID");
+        String selectedMember = input.nextLine();
+
+        controller.findMemberByID(selectedMember);
+    }
+
 
     private void addMember() {
         System.out.println("Hvad er fornavnet på det nye medlem?");
@@ -162,6 +187,10 @@ public class UserInterface {
     private void saveMembers() {
         controller.saveMembers();
         System.out.println("Alle ændringer er blevet gemt");
+    }
+    private void saveResults() {
+        controller.saveResults();
+        System.out.println("Alle resultater er gemt");
     }
     private void deleteMember(){
         System.out.println();
