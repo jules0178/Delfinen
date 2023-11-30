@@ -97,28 +97,30 @@ public class UserInterface {
     private void addNewResult() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+
         System.out.println("Indtast medlemsID for svømmeren");
         String medlemsID = input.nextLine();
 
         System.out.println("Indtast titel på stævnet");
         String eventName = input.nextLine();
 
-        System.out.println("Indtast dato for stævnet");
+        System.out.println("Indtast dato for stævnet i formatet dd/MM/åååå");
         LocalDate date = LocalDate.parse(input.nextLine(), formatter);
 
         System.out.println("Vælg disciplin");
+        Result.SwimStyle styleChoice = null;
 
         for (Result.SwimStyle swimStyle : Result.SwimStyle.values()) {
-            System.out.println(swimStyle);
+            System.out.println(swimStyle.getDiscipline());
         }
         String userInput = input.nextLine().toUpperCase();
-        Result.SwimStyle styleChoice = null;
-        Result.SwimStyle swimStyle = styleChoice;
+
         try {
             styleChoice = Result.SwimStyle.valueOf(userInput);
-            System.out.println("Du har valgt: " + styleChoice);
+            System.out.println("Du har valgt: " + styleChoice.getDiscipline());
         } catch (IllegalArgumentException e) {
             System.out.println("Disciplinen findes ikke");
+            return; //TODO is the above println, and this return line needed?
         }
 
         System.out.println("Indtast minutter");
@@ -137,7 +139,7 @@ public class UserInterface {
         input.nextLine();
 
         CompetitionTime time = new CompetitionTime(minutes, seconds, hundredths);
-        controller.addResult(medlemsID, new Result(medlemsID, eventName, date, swimStyle, time, false));
+        controller.addResult(medlemsID, new Result(medlemsID, eventName, date, styleChoice, time, false));
         saveResults();
     }
 

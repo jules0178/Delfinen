@@ -75,13 +75,16 @@ public class Result {
         public String getDiscipline() {
             return discipline;
         }
-        public class EnumSwitch {
-
+        public static SwimStyle fromString(String disciplineName) {
+            for (SwimStyle style : SwimStyle.values()) {
+                if (style.getDiscipline().equalsIgnoreCase(disciplineName)) {
+                    return style;
+                }
+            }
+            throw new IllegalArgumentException("Svømmestilen '" + disciplineName + "' blev ikke fundet");
         }
     }
-    public void setSwimstyle(SwimStyle swimStyle) {
-        this.swimStyle = swimStyle;
-    }
+
     @Override
     public String toString() {
         return "I " + eventName + " : d. " + date + " : " + time + " i " + swimStyle;
