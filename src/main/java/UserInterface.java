@@ -22,7 +22,6 @@ public class UserInterface {
                 case 3 -> coachMenu();
                 case 9 -> exitProgram();
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
-
             }
         }
     }
@@ -33,8 +32,7 @@ public class UserInterface {
                 1. Menu til formanden
                 2. Menu til kasereren
                 3. Menu til træneren
-                9. Afslut
-                """);
+                9. Afslut""");
     }
     private void chairmanMenu() {
         boolean chairmanMenuRunning = true;

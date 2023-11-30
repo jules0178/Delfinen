@@ -45,8 +45,24 @@ public class Controller {
 
         }
     }
-
     public void addResult(String memberID, Result result) {
+        Member member = database.findMemberByID(memberID);
+
+        if (member instanceof Swimmer) {
+            Swimmer swimmer = (Swimmer) member;
+            List<Result> results = swimmer.getResults();
+            List<Result> practice = swimmer.getPractice();
+
+            if (result.getMemberID().equalsIgnoreCase(memberID) && !result.isPractice()) {
+                results.add(result);
+            } else if (result.getMemberID().equalsIgnoreCase(memberID) && result.isPractice()) {
+                practice.add(result);
+            }
+        } else {
+            System.out.println("Member is not a Swimmer. Cannot add result.");
+        }
+    }
+   /* public void addResult(String memberID, Result result) {
         Swimmer swimmer = (Swimmer) database.findMemberByID(memberID);
         List<Result> results = swimmer.getResults();
         List<Result> practice = swimmer.getPractice();
@@ -57,7 +73,7 @@ public class Controller {
                 practice.add(result);
             }
         }
-
+*/
 
 
     public void addMember(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor) {

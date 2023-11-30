@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 public class Filehandler {
 
     public ArrayList<Member> loadData() throws IOException {
