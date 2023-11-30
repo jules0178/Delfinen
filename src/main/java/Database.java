@@ -51,7 +51,6 @@ public class Database {
     }
 
     public void addResult(String memberID, String eventName, LocalDate date, Result.SwimStyle swimsStyle, CompetitionTime time, boolean isPractice) {
-
         resultList.add(new Result(memberID, eventName, date, swimsStyle, time, isPractice));
     }
 
