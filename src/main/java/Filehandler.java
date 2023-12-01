@@ -15,18 +15,20 @@ public class Filehandler {
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] parts = line.split(";");
-            memberArrayList.add(new Member(parts[0],
-                    parts[1],
-                    parts[2],
-                    Integer.parseInt(parts[3]),
-                    parts[4],
-                    parts[5],
-                    Boolean.parseBoolean(parts[6]),
-                    Boolean.parseBoolean(parts[7]),
-                    parts[8]));
+            // Check if isCompetitor is "true" in the file
+            boolean isCompetitor = Boolean.parseBoolean(parts[7]);
+
+            if (isCompetitor) {
+                memberArrayList.add(new Swimmer(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]),
+                        parts[4], parts[5], Boolean.parseBoolean(parts[6]), Boolean.parseBoolean(parts[7]), parts[8]));
+            } else {
+                memberArrayList.add(new Member(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]),
+                        parts[4], parts[5], Boolean.parseBoolean(parts[6]), Boolean.parseBoolean(parts[7]), parts[8]));
+            }
         }
         return memberArrayList;
     }
+
     public void saveMembers(ArrayList<Member> members){
         try {
             PrintStream output = new PrintStream("Members");
