@@ -15,7 +15,6 @@ public class Filehandler {
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] parts = line.split(";");
-            // Check if isCompetitor is "true" in the file
             boolean isCompetitor = Boolean.parseBoolean(parts[7]);
 
             if (isCompetitor) {
