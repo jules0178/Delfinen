@@ -107,21 +107,7 @@ public class UserInterface {
         System.out.println("Indtast dato for stævnet i formatet dd/MM/åååå");
         LocalDate date = LocalDate.parse(input.nextLine(), formatter);
 
-        System.out.println("Vælg disciplin");
-        Result.SwimStyle styleChoice = null;
-
-        for (Result.SwimStyle swimStyle : Result.SwimStyle.values()) {
-            System.out.println(swimStyle.getDiscipline());
-        }
-        String userInput = input.nextLine().toUpperCase();
-
-        try {
-            styleChoice = Result.SwimStyle.valueOf(userInput);
-            System.out.println("Du har valgt: " + styleChoice.getDiscipline());
-        } catch (IllegalArgumentException e) {
-            System.out.println("Disciplinen findes ikke");
-            return; //TODO is the above println, and this return line needed?
-        }
+        Result.SwimStyle styleChoice = selectStyle();
 
         System.out.println("Indtast minutter");
         int minutes = input.nextInt();
@@ -142,31 +128,33 @@ public class UserInterface {
         controller.addResult(medlemsID, new Result(medlemsID, eventName, date, styleChoice, time, false));
         saveResults();
     }
-    public void selectStyle(){
-    System.out.println("Vælg disciplin");
+    public Result.SwimStyle selectStyle() {
+        System.out.println("Vælg disciplin");
 
-    Result.SwimStyle[] swimStyles = Result.SwimStyle.values();
-for (int i = 0; i < swimStyles.length; i++) {
-        System.out.println((i + 1) + ". " + swimStyles[i].getDiscipline());
-    }
-
-    Result.SwimStyle styleChoice = null;
-try {
-        int choice = Integer.parseInt(input.nextLine());
-        if (choice < 1 || choice > swimStyles.length) {
-            System.out.println("Ugyldigt valg. Vælg et tal mellem 1 og " + swimStyles.length);
-            return;
+        Result.SwimStyle[] swimStyles = Result.SwimStyle.values();
+        for (int i = 0; i < swimStyles.length; i++) {
+            System.out.println((i + 1) + ". " + swimStyles[i].getDiscipline());
         }
-        styleChoice = swimStyles[choice - 1];
-        System.out.println("Du har valgt: " + styleChoice.getDiscipline());
-    } catch (NumberFormatException e) {
-        System.out.println("Indtast venligst et gyldigt tal.");
-        return;
-    } catch (IllegalArgumentException e) {
-        System.out.println("Disciplinen findes ikke");
-        return;
+
+        while (true) {
+            try {
+                System.out.print("Indtast dit valg (1-" + swimStyles.length + "): ");
+                int choice = Integer.parseInt(input.nextLine());
+                if (choice < 1 || choice > swimStyles.length) {
+                    System.out.println("Ugyldigt valg. Vælg et tal mellem 1 og " + swimStyles.length + ".");
+                    continue;
+                }
+                Result.SwimStyle styleChoice = swimStyles[choice - 1];
+                System.out.println("Du har valgt: " + styleChoice.getDiscipline());
+                return styleChoice; // Return the selected style
+            } catch (NumberFormatException e) {
+                System.out.println("Indtast venligst et gyldigt tal.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Disciplinen findes ikke");
+            }
+        }
     }
-    }
+
     private void selectMember() {
         System.out.println("Indtast medlemsID");
         String selectedMember = input.nextLine();
