@@ -142,7 +142,31 @@ public class UserInterface {
         controller.addResult(medlemsID, new Result(medlemsID, eventName, date, styleChoice, time, false));
         saveResults();
     }
+    public void selectStyle(){
+    System.out.println("Vælg disciplin");
 
+    Result.SwimStyle[] swimStyles = Result.SwimStyle.values();
+for (int i = 0; i < swimStyles.length; i++) {
+        System.out.println((i + 1) + ". " + swimStyles[i].getDiscipline());
+    }
+
+    Result.SwimStyle styleChoice = null;
+try {
+        int choice = Integer.parseInt(input.nextLine());
+        if (choice < 1 || choice > swimStyles.length) {
+            System.out.println("Ugyldigt valg. Vælg et tal mellem 1 og " + swimStyles.length);
+            return;
+        }
+        styleChoice = swimStyles[choice - 1];
+        System.out.println("Du har valgt: " + styleChoice.getDiscipline());
+    } catch (NumberFormatException e) {
+        System.out.println("Indtast venligst et gyldigt tal.");
+        return;
+    } catch (IllegalArgumentException e) {
+        System.out.println("Disciplinen findes ikke");
+        return;
+    }
+    }
     private void selectMember() {
         System.out.println("Indtast medlemsID");
         String selectedMember = input.nextLine();
