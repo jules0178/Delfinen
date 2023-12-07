@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class Member  {
     private String name;
@@ -17,7 +18,6 @@ public class Member  {
     private boolean isActive;
     private String memberID;
     private boolean isCompetitor;
-
 
     public Member (String name,String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, String memberID) {
         this.name = name;
@@ -79,7 +79,7 @@ public class Member  {
         int juniorFee = 1000;
         int passiveFee = 500;
         int fee = 0;
-        age = member.calculateAge();
+        int age = member.calculateAge();
         if (!member.isActive) {
             fee = passiveFee;
         }
@@ -91,8 +91,9 @@ public class Member  {
         } else {
             fee = seniorFee/100 * 75;
         }
-      return annualFee = fee;
+      return fee;
     }
+
 
 
     public int calculateAge() {

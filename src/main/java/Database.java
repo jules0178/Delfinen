@@ -17,6 +17,16 @@ public class Database {
         setResultList(filehandler.loadResults());
     }
 
+    public int expectedAnnualIncome() {
+        ArrayList <Member> subs = getMembersArrayList();
+    int total = 0;
+        for (Member m : subs)  {
+            total += m.getAnnualFee(m);
+
+        }
+        return total;
+    }
+
     public String generateMemberID(String name, String surName) {
         String prefix = name.substring(0, 2).toLowerCase() + surName.substring(0, 2).toLowerCase();
         int count = 1;

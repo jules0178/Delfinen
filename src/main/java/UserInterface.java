@@ -63,11 +63,13 @@ public class UserInterface {
         while (treasurerMenuRunning) {
             System.out.println("""
                     Velkommen til SVØMMEKLUBBEN DELFINEN
-                    1. Se forventet indkomst i år (Funktion ikke oprettet endnu)
+                    1. Se forventet indkomst i år 
                     2. Se kontingent for enkelt medlem
                     9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
+                case 1 -> {int total = controller.expectedAnnualIncome();
+                  System.out.println("Den forventet indtægt for dette år er : " + total + ",00 kr.");}
                 case 2 -> selectMember();
                 case 9 -> treasurerMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
@@ -142,6 +144,7 @@ public class UserInterface {
         controller.addResult(medlemsID, new Result(medlemsID, eventName, date, styleChoice, time, false));
         saveResults();
     }
+
 
     private void selectMember() {
         System.out.println("Indtast medlemsID");

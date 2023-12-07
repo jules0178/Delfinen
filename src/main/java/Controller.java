@@ -68,6 +68,9 @@ public class Controller {
         database.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor);
     }
 
+    public int expectedAnnualIncome() {
+        return database.expectedAnnualIncome();
+    }
     public String showMembers() {
         return database.showMembers();
     }
