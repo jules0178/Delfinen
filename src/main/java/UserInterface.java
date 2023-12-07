@@ -179,8 +179,8 @@ public class UserInterface {
 
         System.out.println("Er det en konkurrence svømmer?(j/n)");
         boolean isCompetitor = input.next().equalsIgnoreCase("j");
-
-        controller.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor);
+        boolean isPaid = true;
+        controller.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, isPaid);
         saveMembers();
     }
 

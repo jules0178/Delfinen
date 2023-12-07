@@ -41,14 +41,14 @@ public class Database {
     }
 
     //TODO Vi skal finde en måde at tage højde for inherited class frem for med boolean
-    public void addMember(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor) {
+    public void addMember(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, boolean isPaid) {
         String memberID = generateMemberID(name, surName);
 
        if (isCompetitor) {
-            Swimmer newSwimmer = new Swimmer(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, memberID);
+            Swimmer newSwimmer = new Swimmer(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, memberID, isPaid);
             membersArrayList.add(0, newSwimmer);
         } else {
-            membersArrayList.add(0, new Member(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, memberID));
+            membersArrayList.add(0, new Member(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, memberID, isPaid));
         }
     }
 

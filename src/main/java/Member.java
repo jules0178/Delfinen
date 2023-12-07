@@ -18,8 +18,12 @@ public class Member  {
     private boolean isActive;
     private String memberID;
     private boolean isCompetitor;
+    private boolean isPaid;
 
-    public Member (String name,String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, String memberID) {
+
+
+
+    public Member (String name,String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, String memberID, boolean isPaid) {
         this.name = name;
         this.surName = surName;
         this.email = email;
@@ -29,6 +33,7 @@ public class Member  {
         this.isActive = isActive;
         this.isCompetitor = isCompetitor;
         this.memberID = memberID;
+        this.isPaid = isPaid;
 
     }
     public int getAnnualFee() {
@@ -72,6 +77,9 @@ public class Member  {
 
     public boolean getIsCompetitor() {
         return isCompetitor;
+    }
+    public boolean getIsPaid() {
+        return isPaid;
     }
 
     public int getAnnualFee(Member member) {
@@ -123,8 +131,10 @@ public class Member  {
                 "Telefon nummer: " + phoneNumber + "\n" +
                 "Blev medlem d. " + dateJoined + "\n" +
                 "Er det et aktivt medlem? " + isActive + "\n" +
-                "Er det en konkurrance svømmer? " + isCompetitor + "\n" +
-                "Medlems ID: " + memberID;
+                "Er det en konkurrence svømmer? " + isCompetitor + "\n" +
+                "Medlems ID: " + memberID + "\n" +
+                "Har betalt kontingent: " + isPaid;
+
 
     }
 }
