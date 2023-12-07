@@ -68,6 +68,10 @@ public class Controller {
         database.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor);
     }
 
+    public String searchMember(String searchMember) {
+        return database.searchMember(searchMember);
+    }
+
     public String showMembers() {
         return database.showMembers();
     }

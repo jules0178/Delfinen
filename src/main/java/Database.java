@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -6,15 +7,20 @@ public class Database {
     Filehandler filehandler = new Filehandler();
     private final ArrayList<Member> membersArrayList = new ArrayList<>();
     private final ArrayList<Result> resultList = new ArrayList<>();
+    private final ArrayList<Member> searchMatches = new ArrayList<>();
+
+    public Database() throws IOException {
+        setMembersArrayList(filehandler.loadData());
+        setResultList(filehandler.loadResults());
+    }
     public ArrayList<Member> getMembersArrayList() {
         return membersArrayList;
     }
     public ArrayList<Result> getResultList() {
         return resultList;
     }
-    public Database() throws IOException {
-        setMembersArrayList(filehandler.loadData());
-        setResultList(filehandler.loadResults());
+    public ArrayList<Member> getSearchMatches() {
+        return searchMatches;
     }
 
     public String generateMemberID(String name, String surName) {
@@ -39,6 +45,23 @@ public class Database {
             membersArrayList.add(0, newSwimmer);
         } else {
             membersArrayList.add(0, new Member(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, memberID));
+        }
+    }
+
+    public String searchMember(String searchMember) {
+        searchMatches.clear();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Member member : membersArrayList) {
+            if (member.getName().toLowerCase().contains(searchMember.toLowerCase())) {
+                stringBuilder.append("Fornavn: " + member.getName() + "\n" + "Efternavn: " + member.getSurName() + "\n" + "Medlems ID: " + member.getMemberID() + "\n");
+                searchMatches.add(member);
+            }
+        }
+        if (searchMatches.isEmpty()) {
+            return "Ingen medlemmer funder.";
+        } else {
+            return "Medlemmer fundet!: \n" + stringBuilder;
         }
     }
 

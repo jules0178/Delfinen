@@ -51,6 +51,7 @@ public class UserInterface {
                 case 1 -> addMember();
                 case 2 -> showMembers();
                 case 4 -> deleteMember();
+                case 5 -> searchMember();
                 case 9 -> chairmanMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
@@ -179,6 +180,11 @@ public class UserInterface {
 
         controller.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor);
         saveMembers();
+    }
+
+    private void searchMember() {
+        System.out.println("Søg efter fornavn eller en del af et fornavn: ");
+        System.out.println(controller.searchMember(input.nextLine()));
     }
 
     private void showMembers() {
