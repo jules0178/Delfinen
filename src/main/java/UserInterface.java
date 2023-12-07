@@ -44,7 +44,7 @@ public class UserInterface {
                 2. Vis liste over alle medlemmer
                 3. Rediger oplysninger for et medlem (Funktion ikke oprettet endnu)
                 4. Slet et medlem 
-                5. Søg på medlemmer (Funktion ikke oprettet endnu)
+                5. Søg på medlemmer 
                 9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
@@ -183,7 +183,7 @@ public class UserInterface {
     }
 
     private void searchMember() {
-        System.out.println("Søg efter fornavn eller en del af et fornavn: ");
+        System.out.println("Søg efter navn eller ID: ");
         System.out.println(controller.searchMember(input.nextLine()));
     }
 

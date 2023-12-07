@@ -53,17 +53,23 @@ public class Database {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Member member : membersArrayList) {
-            if (member.getName().toLowerCase().contains(searchMember.toLowerCase())) {
-                stringBuilder.append("Fornavn: " + member.getName() + "\n" + "Efternavn: " + member.getSurName() + "\n" + "Medlems ID: " + member.getMemberID() + "\n");
+            if (member.getName().toLowerCase().contains(searchMember.toLowerCase())
+                    || member.getMemberID().toLowerCase().contains(searchMember.toLowerCase())) {
+                stringBuilder.append("Fornavn: " + member.getName() + "\n" +
+                        "Efternavn: " + member.getSurName() + "\n" +
+                        "Medlems ID: " + member.getMemberID() + "\n");
                 searchMatches.add(member);
+                stringBuilder.append("--------------------\n");
             }
         }
+
         if (searchMatches.isEmpty()) {
-            return "Ingen medlemmer funder.";
+            return "Ingen medlemmer fundet.";
         } else {
-            return "Medlemmer fundet!: \n" + stringBuilder;
+            return "Medlemmer fundet:\n" + stringBuilder;
         }
     }
+
 
     public void setMembersArrayList(ArrayList<Member> liste) {
         membersArrayList.addAll(liste);
