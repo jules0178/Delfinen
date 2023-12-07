@@ -29,9 +29,9 @@ public class UserInterface {
 
         System.out.println("""
                 Velkommen til svømmeklubben Delfinen!
-                1. Menu til formanden
-                2. Menu til kasereren
-                3. Menu til træneren
+                1. Formanden
+                2. Kasereren
+                3. Træneren
                 9. Afslut""");
     }
     private void chairmanMenu() {
@@ -43,8 +43,8 @@ public class UserInterface {
                 1. Tilføj nyt medlem
                 2. Vis liste over alle medlemmer
                 3. Rediger oplysninger for et medlem (Funktion ikke oprettet endnu)
-                4. Slet et medlem 
-                5. Søg på medlemmer 
+                4. Slet et medlem
+                5. Søg på medlemmer
                 9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
