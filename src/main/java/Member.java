@@ -15,7 +15,7 @@ public class Member  {
     //TODO refaktoreres til LocalDate;
     private String dateJoined;
     private int annualFee;
-    private boolean isActive;
+    protected boolean isActive;
     private String memberID;
     private boolean isCompetitor;
     private boolean isPaid;

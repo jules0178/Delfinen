@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
@@ -68,9 +70,16 @@ public class Controller {
         database.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, isPaid);
     }
 
+    public int getAnnualFee(Member member) {
+        return database.getAnnualFee(member);
+    }
     public int expectedAnnualIncome() {
         return database.expectedAnnualIncome();
     }
+
+   public void membersInDebt (){
+        database.membersInDebt();
+   }
     public String showMembers() {
         return database.showMembers();
     }

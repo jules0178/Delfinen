@@ -16,10 +16,41 @@ public class Database {
         setMembersArrayList(filehandler.loadData());
         setResultList(filehandler.loadResults());
     }
+    public void membersInDebt () {
 
+        for (Member member : getMembersArrayList()) {
+            int fee = getAnnualFee(member);
+            boolean isPaid = member.getIsPaid();
+            if (!isPaid) {
+                System.out.println("Member ID: " + member.getMemberID() +"\n" + "Navn: " + member.getName() + "\n" +
+                        "mangler at betale: " + fee + ",00 kr.");
+
+            }
+        }
+    }
+
+    public int getAnnualFee(Member member) {
+        int seniorFee = 1600;
+        int juniorFee = 1000;
+        int passiveFee = 500;
+        int fee = 0;
+        int age = member.calculateAge();
+        if (!member.isActive) {
+            fee = passiveFee;
+        }
+        else if (age < 18) {
+            fee = juniorFee;
+        } else if (age > 18 && age < 60) {
+            fee = seniorFee;
+
+        } else {
+            fee = seniorFee/100 * 75;
+        }
+        return fee;
+    }
     public int expectedAnnualIncome() {
         ArrayList <Member> subs = getMembersArrayList();
-    int total = 0;
+        int total = 0;
         for (Member m : subs)  {
             total += m.getAnnualFee(m);
 
