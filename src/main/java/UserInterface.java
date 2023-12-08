@@ -42,9 +42,9 @@ public class UserInterface {
                 Velkommen til SVØMMEKLUBBEN DELFINEN.
                 1. Tilføj nyt medlem
                 2. Vis liste over alle medlemmer
-                3. Rediger oplysninger for et medlem 
-                4. Slet et medlem 
-                5. Søg på medlemmer (Funktion ikke oprettet endnu)
+                3. Rediger oplysninger for et medlem
+                4. Slet et medlem
+                5. Søg på medlemmer
                 9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
