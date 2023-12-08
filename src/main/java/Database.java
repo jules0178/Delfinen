@@ -76,7 +76,7 @@ public class Database {
     }
         public Member findMemberByID(String memberID) {
             for (Member member : membersArrayList) {
-                if (member.getMemberID().equals(memberID)) {
+                if (member.getMemberID().equalsIgnoreCase(memberID)) {
                     return member;
                 }
             }

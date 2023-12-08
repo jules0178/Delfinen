@@ -79,4 +79,7 @@ public class Controller {
             System.out.println("Medlem med ID:" + memberID + ". Medlem er slettet.\n");
         }
     }
+    public Member findMemberByID(String memberID) {
+        return memberDatabase.findMemberByID(memberID);
+        }
 }
