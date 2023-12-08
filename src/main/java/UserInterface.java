@@ -40,7 +40,8 @@ public class UserInterface {
 
         while (chairmanMenuRunning) {
             System.out.println("""
-                Velkommen til SVØMMEKLUBBEN DELFINEN.
+                Velkommen til SVØMMEKLUBBEN DELFINEN
+                ------------------------------------------------------
                 1. Tilføj nyt medlem
                 2. Vis liste over alle medlemmer
                 3. Rediger oplysninger for et medlem
@@ -66,9 +67,10 @@ public class UserInterface {
         while (treasurerMenuRunning) {
             System.out.println("""
                     Velkommen til SVØMMEKLUBBEN DELFINEN
+                    ------------------------------------------------------
                     1. Se Kontingent for medlem
                     2. Se medlemmer i restance
-                    3. Se forventet indkomst i år 
+                    3. Se forventet indkomst i år
                     9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
