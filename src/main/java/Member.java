@@ -48,7 +48,7 @@ public class Member  {
         return age;
     }
 
-    public String getName() {
+    public String getName(){
         return name;
     }
     public void setName(String name) {
@@ -97,10 +97,11 @@ public class Member  {
     public boolean getIsCompetitor() {
         return isCompetitor;
     }
-
+    public boolean getIsPaid() {
+        return isPaid;
+    }
     public void setIsCompetitor (boolean isCompetitor) {
         this.isCompetitor = isCompetitor;
-
     }
 
     public int getAnnualFee(Member member) {
@@ -120,9 +121,8 @@ public class Member  {
         } else {
             fee = seniorFee/100 * 75;
         }
-      return fee;
+        return fee;
     }
-
 
 
     public int calculateAge() {

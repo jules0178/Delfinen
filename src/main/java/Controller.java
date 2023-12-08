@@ -70,11 +70,20 @@ public class Controller {
         database.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, isPaid);
     }
 
+    public int getAnnualFee(Member member) {
+        return database.getAnnualFee(member);
+    }
+    public int expectedAnnualIncome() {
+        return database.expectedAnnualIncome();
+    }
 
     public String searchMember(String searchMember) {
         return database.searchMember(searchMember);
     }
 
+    public void membersInDebt (){
+        database.membersInDebt();
+    }
     public String showMembers() {
         return database.showMembers();
     }
