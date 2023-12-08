@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -65,12 +66,16 @@ public class UserInterface {
         while (treasurerMenuRunning) {
             System.out.println("""
                     Velkommen til SVØMMEKLUBBEN DELFINEN
-                    1. Se forventet indkomst i år (Funktion ikke oprettet endnu)
-                    2. Se kontingent for enkelt medlem
+                    1. Se Kontingent for medlem
+                    2. Se medlemmer i restance
+                    3. Se forventet indkomst i år 
                     9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
-                case 2 -> selectMember();
+                case 1 -> selectMember();
+                case 2 -> membersInDebt();
+                case 3 -> {int total = controller.expectedAnnualIncome();
+                  System.out.println("Den forventet indtægt for dette år er: " + total + ",00 kr.");}
                 case 9 -> treasurerMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
@@ -146,14 +151,22 @@ public class UserInterface {
         saveResults();
     }
 
+
     private void selectMember() {
         System.out.println("Indtast medlemsID");
         String selectedMember = input.nextLine();
 
-        controller.findMemberByID(selectedMember);
+        System.out.println("Medlemmet: " + controller.findMemberByID(selectedMember));
+
+        Member m = controller.findMemberByID(selectedMember);
     }
 
 
+
+    private void membersInDebt () {
+        System.out.println("Medlemmer i restance:" + "\n");
+        controller.membersInDebt();
+    }
     private void addMember() {
         System.out.println("Hvad er fornavnet på det nye medlem?");
         String name = input.nextLine();
@@ -180,7 +193,9 @@ public class UserInterface {
         System.out.println("Er det en konkurrence svømmer?(j/n)");
         boolean isCompetitor = input.next().equalsIgnoreCase("j");
 
-        controller.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor);
+       boolean isPaid = true;
+
+        controller.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, isPaid);
         saveMembers();
     }
 

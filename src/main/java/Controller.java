@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
@@ -64,14 +66,24 @@ public class Controller {
         }
     }
 
-    public void addMember(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor) {
-        database.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor);
+    public void addMember(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, boolean isPaid) {
+        database.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, isPaid);
+    }
+
+    public int getAnnualFee(Member member) {
+        return database.getAnnualFee(member);
+    }
+    public int expectedAnnualIncome() {
+        return database.expectedAnnualIncome();
     }
 
     public String searchMember(String searchMember) {
         return database.searchMember(searchMember);
     }
 
+   public void membersInDebt (){
+        database.membersInDebt();
+   }
     public String showMembers() {
         return database.showMembers();
     }

@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class Member  {
     private String name;
@@ -14,12 +15,15 @@ public class Member  {
     //TODO refaktoreres til LocalDate;
     private String dateJoined;
     private int annualFee;
-    private boolean isActive;
+    protected boolean isActive;
     private String memberID;
     private boolean isCompetitor;
+    private boolean isPaid;
 
 
-    public Member (String name,String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, String memberID) {
+
+
+    public Member (String name,String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, String memberID, boolean isPaid) {
         this.name = name;
         this.surName = surName;
         this.email = email;
@@ -29,6 +33,7 @@ public class Member  {
         this.isActive = isActive;
         this.isCompetitor = isCompetitor;
         this.memberID = memberID;
+        this.isPaid = isPaid;
 
     }
     public int getAnnualFee() {
@@ -43,7 +48,7 @@ public class Member  {
         return age;
     }
 
-    public String getName() {
+    public String getName(){
         return name;
     }
     public void setName(String name) {
@@ -92,6 +97,9 @@ public class Member  {
     public boolean getIsCompetitor() {
         return isCompetitor;
     }
+    public boolean getIsPaid() {
+        return isPaid;
+    }
     public void setIsCompetitor (boolean isCompetitor) {
         this.isCompetitor = isCompetitor;
     }
@@ -101,7 +109,7 @@ public class Member  {
         int juniorFee = 1000;
         int passiveFee = 500;
         int fee = 0;
-        age = member.calculateAge();
+        int age = member.calculateAge();
         if (!member.isActive) {
             fee = passiveFee;
         }
@@ -113,7 +121,7 @@ public class Member  {
         } else {
             fee = seniorFee/100 * 75;
         }
-      return annualFee = fee;
+      return fee;
     }
 
 
@@ -144,8 +152,10 @@ public class Member  {
                 "Telefon nummer: " + phoneNumber + "\n" +
                 "Blev medlem d. " + dateJoined + "\n" +
                 "Er det et aktivt medlem? " + isActive + "\n" +
-                "Er det en konkurrance svømmer? " + isCompetitor + "\n" +
-                "Medlems ID: " + memberID;
+                "Er det en konkurrence svømmer? " + isCompetitor + "\n" +
+                "Medlems ID: " + memberID + "\n" +
+                "Har betalt kontingent: " + isPaid;
+
 
     }
 }

@@ -22,6 +22,47 @@ public class Database {
     public ArrayList<Member> getSearchMatches() {
         return searchMatches;
     }
+    public void membersInDebt () {
+
+        for (Member member : getMembersArrayList()) {
+            int fee = getAnnualFee(member);
+            boolean isPaid = member.getIsPaid();
+            if (!isPaid) {
+                System.out.println("Member ID: " + member.getMemberID() +"\n" + "Navn: " + member.getName() + "\n" +
+                        "mangler at betale: " + fee + ",00 kr.");
+
+            }
+        }
+    }
+
+    public int getAnnualFee(Member member) {
+        int seniorFee = 1600;
+        int juniorFee = 1000;
+        int passiveFee = 500;
+        int fee = 0;
+        int age = member.calculateAge();
+        if (!member.isActive) {
+            fee = passiveFee;
+        }
+        else if (age < 18) {
+            fee = juniorFee;
+        } else if (age > 18 && age < 60) {
+            fee = seniorFee;
+
+        } else {
+            fee = seniorFee/100 * 75;
+        }
+        return fee;
+    }
+    public int expectedAnnualIncome() {
+        ArrayList <Member> subs = getMembersArrayList();
+        int total = 0;
+        for (Member m : subs)  {
+            total += m.getAnnualFee(m);
+
+        }
+        return total;
+    }
 
     public String generateMemberID(String name, String surName) {
         String prefix = name.substring(0, 2).toLowerCase() + surName.substring(0, 2).toLowerCase();
@@ -37,14 +78,14 @@ public class Database {
     }
 
     //TODO Vi skal finde en måde at tage højde for inherited class frem for med boolean
-    public void addMember(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor) {
+    public void addMember(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, boolean isPaid) {
         String memberID = generateMemberID(name, surName);
 
        if (isCompetitor) {
-            Swimmer newSwimmer = new Swimmer(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, memberID);
+            Swimmer newSwimmer = new Swimmer(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, memberID, isPaid);
             membersArrayList.add(0, newSwimmer);
         } else {
-            membersArrayList.add(0, new Member(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, memberID));
+            membersArrayList.add(0, new Member(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, memberID, isPaid));
         }
     }
 
