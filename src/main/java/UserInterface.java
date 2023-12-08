@@ -84,6 +84,7 @@ public class UserInterface {
         while (coachMenuRunning) {
             System.out.println("""
                     Velkommen til SVØMMEKLUBBEN DELFINEN
+                    ------------------------------------------------------
                     1. Se top 5 svømmere (Funktion ikke oprettet endnu)
                     2. Tilføj stævne resultat til en svømmer.
                     9. Gå tilbage til hovedmenuen""");
