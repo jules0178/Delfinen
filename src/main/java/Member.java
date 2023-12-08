@@ -43,23 +43,39 @@ public class Member  {
         return age;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSurName() {
         return surName;
     }
+    public void setSurName(String surName) {
+        this.surName = surName;
+    }
 
     public String getEmail() {
         return email;
     }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public int getPhoneNumber() {
         return phoneNumber;
+    }
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getDateOfBirth() {
         return dateOfBirth;
+    }
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getDateJoined() {
@@ -69,9 +85,15 @@ public class Member  {
     public boolean getIsActive() {
         return isActive;
     }
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
 
     public boolean getIsCompetitor() {
         return isCompetitor;
+    }
+    public void setIsCompetitor (boolean isCompetitor) {
+        this.isCompetitor = isCompetitor;
     }
 
     public int getAnnualFee(Member member) {
