@@ -43,7 +43,7 @@ public class UserInterface {
                 1. Tilføj nyt medlem
                 2. Vis liste over alle medlemmer
                 3. Rediger oplysninger for et medlem (Funktion ikke oprettet endnu)
-                4. Slet et medlem 
+                4. Slet et medlem
                 5. Søg på medlemmer (Funktion ikke oprettet endnu)
                 9. Gå tilbage til hovedmenuen""");
 
@@ -83,17 +83,39 @@ public class UserInterface {
             System.out.println("""
                     Velkommen til SVØMMEKLUBBEN DELFINEN
                     1. Se top 5 svømmere (Funktion ikke oprettet endnu)
-                    2. Tilføj stævne resultat til en svømmer.
+                    2. Tilføj stævne resultat til svømmer.
+                    3. Tilføj trænings result til svømmer.
+                    4. Se en svømmers resultater.
                     9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
-                case 2 ->  addNewResult();
+                case 2 -> addNewResult();
+                case 3 -> addNewPracticeResult();
+                case 4 -> displayResultPrompt();
                 case 9 -> coachMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
         }
     }
 
+    private void addNewPracticeResult() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        System.out.println("Indtast medlemsID for svømmeren");
+        String medlemsID = input.nextLine();
+
+        System.out.println("Indtast dato for træningsresultat i format: dd/MM/åååå");
+        LocalDate date = LocalDate.parse(input.nextLine(), formatter);
+
+        Result.SwimStyle styleChoice = selectStyle();
+
+        CompetitionTime time = promptCompetitionTime();
+
+        String eventName = "Træning";
+
+        controller.addResult(medlemsID, new Result(medlemsID, eventName, date, styleChoice, time, true));
+        saveResults();
+    }
     private void addNewResult() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -109,24 +131,26 @@ public class UserInterface {
 
         Result.SwimStyle styleChoice = selectStyle();
 
-        System.out.println("Indtast minutter");
-        int minutes = input.nextInt();
+        CompetitionTime time = promptCompetitionTime();
 
-        input.nextLine();
-
-        System.out.println("Indtast sekunder");
-        int seconds = input.nextInt();
-
-        input.nextLine();
-
-        System.out.println("Indtast hundrededele ");
-        int hundredths = input.nextInt();
-
-        input.nextLine();
-
-        CompetitionTime time = new CompetitionTime(minutes, seconds, hundredths);
         controller.addResult(medlemsID, new Result(medlemsID, eventName, date, styleChoice, time, false));
         saveResults();
+    }
+    public void displayResultPrompt(){
+        System.out.println("Indtast medlemsID for svømmeren");
+        String memberID = input.nextLine();
+        Result.SwimStyle styleChoice = selectStyle();
+        displayResults(memberID, styleChoice);
+    }
+    public void displayResults(String memberID, Result.SwimStyle swimStyle){
+        ArrayList<Result> results = controller.getResultList();
+
+        for (Result r : results) {
+            if(r.getMemberID().equalsIgnoreCase(memberID) && r.getStyle().equals(swimStyle)){
+                System.out.println(r);
+            }
+        }
+        System.out.println("Intet match for dette ID");
     }
     public Result.SwimStyle selectStyle() {
         System.out.println("Vælg disciplin");
@@ -146,7 +170,7 @@ public class UserInterface {
                 }
                 Result.SwimStyle styleChoice = swimStyles[choice - 1];
                 System.out.println("Du har valgt: " + styleChoice.getDiscipline());
-                return styleChoice; // Return the selected style
+                return styleChoice;
             } catch (NumberFormatException e) {
                 System.out.println("Indtast venligst et gyldigt tal.");
             } catch (IllegalArgumentException e) {
@@ -154,6 +178,29 @@ public class UserInterface {
             }
         }
     }
+    private CompetitionTime promptCompetitionTime() {
+        CompetitionTime time = null;
+        while (time == null) {
+            try {
+                System.out.println("Indtast minutter");
+                int minutes = Integer.parseInt(input.nextLine());
+
+                System.out.println("Indtast sekunder");
+                int seconds = Integer.parseInt(input.nextLine());
+
+                System.out.println("Indtast hundrededele");
+                int hundredths = Integer.parseInt(input.nextLine());
+
+                time = CompetitionTime.createCompetitionTime(minutes, seconds, hundredths);
+            } catch (NumberFormatException e) {
+                System.out.println("Indtast venligst et gyldigt tal.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return time;
+    }
+
 
     private void selectMember() {
         System.out.println("Indtast medlemsID");
@@ -197,7 +244,6 @@ public class UserInterface {
         System.out.println(controller.showMembers());
     }
 
-
     private void saveMembers() {
         controller.saveMembers();
         System.out.println("Alle ændringer er blevet gemt");
@@ -229,7 +275,7 @@ public class UserInterface {
         try {
             inputInt = Integer.parseInt(inputString);
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input! Try again:");
+            System.out.println("Tallet er ikke accpeteret");
             inputInt = takeUserInput();
         }
         return inputInt;

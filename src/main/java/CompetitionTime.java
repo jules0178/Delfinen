@@ -3,39 +3,34 @@ public class CompetitionTime implements Comparable<CompetitionTime> {
     private int seconds;
     private int hundredths;
 
+    public static CompetitionTime createCompetitionTime(int minutes, int seconds, int hundredths) {
+        if (minutes < 0 || minutes >= 60) {
+            throw new IllegalArgumentException("Indtast en værdi fra 0-59");
+        }
+        if (seconds < 0 || seconds >= 60) {
+            throw new IllegalArgumentException("Indtast en værdi fra 0-59");
+        }
+        if (hundredths < 0 || hundredths >= 100) {
+            throw new IllegalArgumentException("Indtast en værdi fra 0-100");
+        }
+        return new CompetitionTime(minutes, seconds, hundredths);
+    }
+
+    // Constructor can be private if it's only called from within the class
     public CompetitionTime(int minutes, int seconds, int hundredths) {
-        setMinutes(minutes);
-        setSeconds(seconds);
-        setHundredths(hundredths);
-    }
-
-    public void setMinutes(int minutes) {
         this.minutes = minutes;
+        this.seconds = seconds;
+        this.hundredths = hundredths;
     }
 
-    public void setSeconds(int seconds) {
-        if (seconds >= 0 && seconds < 60) {
-            this.seconds = seconds;
-        } else {
-            throw new IllegalArgumentException("Indtast et tal fra 0-59");
-        }
-    }
-
-    public void setHundredths(int hundredths) {
-        if (hundredths >= 0 && hundredths < 100) {
-            this.hundredths = hundredths;
-        } else {
-            throw new IllegalArgumentException("Indtast et tal fra 0-99");
-        }
-    }
 
     @Override
     public int compareTo(CompetitionTime other) {
 
-        int totalSecondsThis = this.minutes * 60 + this.seconds;
-        int totalSecondsOther = other.minutes * 60 + other.seconds;
+        int totalHundredthsThis = this.minutes * 6000 + this.seconds * 100 + this.hundredths;
+        int totalHundredthsOther = other.minutes * 6000 + other.seconds * 100 + other.hundredths;
 
-        return Integer.compare(totalSecondsThis, totalSecondsOther);
+        return Integer.compare(totalHundredthsThis, totalHundredthsOther);
     }
 
     @Override

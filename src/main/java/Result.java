@@ -47,12 +47,6 @@ public class Result {
     public boolean isPractice() {
         return isPractice;
     }
-    public void setPractice(boolean isPractice) {
-        this.isPractice = true;
-    }
-    public void setIsNotPractice(boolean isPractice) {
-        this.isPractice = false;
-    }
 
     public CompetitionTime getTime() {
         return time;
@@ -87,7 +81,7 @@ public class Result {
 
     @Override
     public String toString() {
-        return "I " + eventName + " : d. " + date + " : " + time + " i " + swimStyle;
+        return "I " + eventName + " : d. " + date + " : " + time + " i " + swimStyle.getDiscipline();
     }
 
 

@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
@@ -78,7 +79,11 @@ public class Controller {
     public void saveResults() {
         database.saveResults();
     }
-
+    public ArrayList<Result> getResultList() {
+        if (!database.getResultList().isEmpty()){
+        return database.getResultList(); }
+        return null;
+    }
     public void deleteMember(String memberID){
         Member memberToDelete = database.findMemberByID(memberID);
         if (memberToDelete !=null){
