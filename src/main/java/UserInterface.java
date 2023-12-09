@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -28,7 +27,6 @@ public class UserInterface {
     }
 
     private void showMainMenu() {
-
         System.out.println("""
                 Velkommen til SVØMMEKLUBBEN DELFINEN
                 ------------------------------------------------------
@@ -40,7 +38,6 @@ public class UserInterface {
 
     private void chairmanMenu() {
         boolean chairmanMenuRunning = true;
-
         while (chairmanMenuRunning) {
             System.out.println("""
                     Velkommen til SVØMMEKLUBBEN DELFINEN
@@ -116,7 +113,6 @@ public class UserInterface {
 
     private void promptDisplayTopFive() {
         Team team = null;
-
         while (team == null) {
             System.out.println("""
                     Vælg junior eller senior hold.
@@ -138,12 +134,10 @@ public class UserInterface {
                 swimmers.add((Swimmer) member);
             }
         }
-
         System.out.println("Antal svømmere på holdet: " + swimmers.size());
 
         displayTopFive(swimmers, styleChoice);
     }
-
 
     public void displayTopFive(List<Swimmer> team, Result.SwimStyle style) {
         List<SwimmerBestTime> swimmerTimes = new ArrayList<>();
@@ -220,7 +214,6 @@ public class UserInterface {
                 matchFound = true;
             }
         }
-
         if (!matchFound) {
             System.out.println("Intet match for dette ID");
         }
@@ -234,7 +227,6 @@ public class UserInterface {
         for (int i = 0; i < swimStyles.length; i++) {
             System.out.println((i + 1) + ". " + swimStyles[i].getDiscipline());
         }
-
         while (true) {
             try {
                 System.out.print("Indtast dit valg (1-" + swimStyles.length + "): ");
@@ -277,7 +269,6 @@ public class UserInterface {
         return time;
     }
 
-
     private void selectMember() {
         System.out.println("Indtast medlemsID");
         String selectedMember = input.nextLine();
@@ -286,7 +277,6 @@ public class UserInterface {
 
         Member m = controller.findMemberByID(selectedMember);
     }
-
 
     private void membersInDebt() {
         System.out.println("Medlemmer i restance:" + "\n");
@@ -447,7 +437,6 @@ public class UserInterface {
         }
     }
 
-
     private void saveMembers() {
         controller.saveMembers();
         System.out.println("Alle ændringer er blevet gemt");
@@ -472,7 +461,6 @@ public class UserInterface {
             System.out.println("Handling afbrudt.");
         }
     }
-
 
     private int takeUserInput() {
         String inputString = input.nextLine();
