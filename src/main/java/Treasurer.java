@@ -4,5 +4,4 @@ public class Treasurer extends Member {
     }
 
 
-    }
-
+}

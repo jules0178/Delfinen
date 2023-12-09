@@ -33,7 +33,7 @@ public class Filehandler {
             PrintStream output = new PrintStream("Members");
             for (Member member : members) {
                 output.println(member.getName() + ";" + member.getSurName() + ";" +
-                member.getEmail() + ";" + member.getPhoneNumber() + ";" +
+                        member.getEmail() + ";" + member.getPhoneNumber() + ";" +
                         member.getDateOfBirth() + ";" + member.getDateJoined() + ";" +
                         member.getIsActive() + ";" + member.getIsCompetitor() + ";" + member.getMemberID() + ";" + member.getIsPaid());
             }
@@ -62,10 +62,10 @@ public class Filehandler {
                     Enum.valueOf(Result.SwimStyle.class, parts[3].toUpperCase()),
                     competitionTime,
                     Boolean.parseBoolean(parts[5])));
-                }
-            return resultsList;
-     }
-     public void saveResults(ArrayList<Result> resultsList){
+        }
+        return resultsList;
+    }
+    public void saveResults(ArrayList<Result> resultsList){
         try {
             PrintStream output = new PrintStream("Results");
             for (Result result : resultsList) {
@@ -76,5 +76,5 @@ public class Filehandler {
         }catch (IOException e) {
             e.printStackTrace();
         }
-     }
+    }
 }
