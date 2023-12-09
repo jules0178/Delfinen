@@ -122,8 +122,6 @@ public class UserInterface {
             }
         }
 
-        System.out.println("Selected team: " + team.getName() + " with " + team.getMembers().size() + " members"); // Debug statement
-
         Result.SwimStyle styleChoice = selectStyle();
         List<Swimmer> swimmers = new ArrayList<>();
         for (Member member : team.getMembers()) {
@@ -132,7 +130,7 @@ public class UserInterface {
             }
         }
 
-        System.out.println("Number of swimmers: " + swimmers.size()); // Debug statement
+        System.out.println("Antal svømmere på holdet: " + swimmers.size());
 
         displayTopFive(swimmers, styleChoice);
     }
@@ -145,13 +143,8 @@ public class UserInterface {
             CompetitionTime bestTime = swimmer.findBestTime(style);
             if (bestTime != null) {
                 swimmerTimes.add(new SwimmerBestTime(swimmer, bestTime));
-            } else {
-                System.out.println("No best time for swimmer: " + swimmer.getName()); // Debug statement
             }
         }
-
-        System.out.println("Number of swimmer times: " + swimmerTimes.size()); // Debug statement
-
         swimmerTimes.sort(Comparator.comparing(SwimmerBestTime::getBestTime));
 
         for (int i = 0; i < Math.min(5, swimmerTimes.size()); i++) {

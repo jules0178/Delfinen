@@ -32,7 +32,6 @@ public class Swimmer extends Member {
     }
     public CompetitionTime findBestTime(Result.SwimStyle style) {
         List<Result> results = this.getResults();
-        System.out.println("Finding best time for style: " + style); // Debug
 
         CompetitionTime personalBest = null;
 
@@ -45,7 +44,6 @@ public class Swimmer extends Member {
                 }
             }
         }
-        System.out.println("Best time found: " + personalBest); // Debug
         return personalBest;
     }
 }
