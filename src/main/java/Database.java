@@ -64,6 +64,19 @@ public class Database {
         return total;
     }
 
+    public int totalDebt() {
+        ArrayList <Member> subs = getMembersArrayList();
+        int total = 0;
+        for (Member m : subs)  {
+            if(!m.getIsPaid())
+            total += getAnnualFee(m);
+
+
+        }
+        return total;
+
+    }
+
     public String generateMemberID(String name, String surName) {
         String prefix = name.substring(0, 2).toLowerCase() + surName.substring(0, 2).toLowerCase();
         int count = 1;

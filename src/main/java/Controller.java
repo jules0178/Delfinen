@@ -82,6 +82,9 @@ public class Controller {
         return database.expectedAnnualIncome();
     }
 
+    public int totalDebt() {
+        return database.totalDebt();
+    }
     public String searchMember(String searchMember) {
         return database.searchMember(searchMember);
     }
