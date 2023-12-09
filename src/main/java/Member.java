@@ -20,9 +20,6 @@ public class Member  {
     private boolean isCompetitor;
     private boolean isPaid;
 
-
-
-
     public Member (String name,String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, String memberID, boolean isPaid) {
         this.name = name;
         this.surName = surName;

@@ -15,7 +15,7 @@ public class Filehandler {
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] parts = line.split(";");
-            boolean isCompetitor = Boolean.parseBoolean(parts[8]);
+            boolean isCompetitor = Boolean.parseBoolean(parts[7]);
 
             if (isCompetitor) {
                 memberArrayList.add(new Swimmer(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]),
@@ -41,7 +41,7 @@ public class Filehandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+  }
     public ArrayList<Result> loadResults() throws IOException {
         ArrayList<Result> resultsList = new ArrayList<>();
         Scanner scanner = new Scanner(new File("Results"));
