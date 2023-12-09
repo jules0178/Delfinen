@@ -73,7 +73,7 @@ public class Result {
                     return style;
                 }
             }
-            throw new IllegalArgumentException("Svømmestilen '" + disciplineName + "' blev ikke fundet");
+            throw new IllegalArgumentException("Svømmestilen blev ikke fundet");
         }
     }
 

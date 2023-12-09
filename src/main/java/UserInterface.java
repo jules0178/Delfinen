@@ -84,14 +84,16 @@ public class UserInterface {
                     2. Tilføj stævne resultat til svømmer.
                     3. Tilføj trænings result til svømmer.
                     4. Se en svømmers resultater.
-                    9. Gå tilbage til hovedmenuen""");
+                    5. Se en svømmers bedste tid.
+                    6. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
                 case 1 -> promptDisplayTopFive();
                 case 2 -> addNewResult();
                 case 3 -> addNewPracticeResult();
                 case 4 -> displayResultPrompt();
-                case 9 -> coachMenuRunning = false;
+                case 5 -> displayBestTimePrompt();
+                case 6 -> coachMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
         }
@@ -109,11 +111,11 @@ public class UserInterface {
             switch (takeUserInput()) {
                 case 1 -> team = controller.getJuniorTeam();
                 case 2 -> team = controller.getSeniorTeam();
-                default -> System.out.println("Indtast venligst et gyldigt tal.");
+                default -> System.out.println("Indtast en gyldig værdi.");
             }
         }
 
-        System.out.println("Selected team: " + team.getName() + " with " + team.getMembers().size() + " members"); // Debug statement
+        System.out.println("Hold " + team.getName() + " med " + team.getMembers().size() + " medlemmer");
 
         Result.SwimStyle styleChoice = selectStyle();
         List<Swimmer> swimmers = new ArrayList<>();
@@ -122,9 +124,6 @@ public class UserInterface {
                 swimmers.add((Swimmer) member);
             }
         }
-
-        System.out.println("Number of swimmers: " + swimmers.size()); // Debug statement
-
         displayTopFive(swimmers, styleChoice);
     }
 
@@ -137,11 +136,9 @@ public class UserInterface {
             if (bestTime != null) {
                 swimmerTimes.add(new SwimmerBestTime(swimmer, bestTime));
             } else {
-                System.out.println("No best time for swimmer: " + swimmer.getName()); // Debug statement
+                System.out.println("Ingen bedste tid for: " + swimmer.getName()); // Debug statement
             }
         }
-
-        System.out.println("Number of swimmer times: " + swimmerTimes.size()); // Debug statement
 
         swimmerTimes.sort(Comparator.comparing(SwimmerBestTime::getBestTime));
 
@@ -188,6 +185,32 @@ public class UserInterface {
         controller.addResult(medlemsID, new Result(medlemsID, eventName, date, styleChoice, time, false));
         saveResults();
     }
+    public void displayBestTimePrompt() {
+        System.out.println("Indtast medlemsID for svømmeren");
+        String memberID = input.nextLine();
+        Result.SwimStyle styleChoice = selectStyle();
+
+        displayBestTime(memberID, styleChoice);
+    }
+
+    public void displayBestTime(String memberID, Result.SwimStyle swimStyle) {
+        Member swimmer = controller.findMemberByID(memberID);
+
+        if (swimmer instanceof Swimmer) {
+            Swimmer swimmerObj = (Swimmer) swimmer;
+            CompetitionTime bestTime = swimmerObj.findBestTime(swimStyle);
+
+            if (bestTime != null) {
+                System.out.println("Bedste tid for " + swimmer.getName() + " i " + swimStyle.getDiscipline() + ": " + bestTime);
+            } else {
+                System.out.println(swimmer.getName() + " har ingen registrerede tider i " + swimStyle.getDiscipline());
+            }
+        } else {
+            System.out.println("Intet match for dette ID som en svømmer.");
+        }
+        System.out.println(); // Line break
+    }
+
     public void displayResultPrompt(){
         System.out.println("Indtast medlemsID for svømmeren");
         String memberID = input.nextLine();
@@ -206,7 +229,7 @@ public class UserInterface {
                 matchFound = true;
             }
         }
-
+        System.out.println();//linebreak
         if (!matchFound) {
             System.out.println("Intet match for dette ID");
         }System.out.println();//linebreak
