@@ -34,9 +34,7 @@ public class Swimmer extends Member {
         List<Result> results = this.getResults();
 
         CompetitionTime personalBest = null;
-
         for (Result result : results) {
-
             if (result.getStyle() == style) {
                 CompetitionTime currentTime = result.getTime();
                 if (currentTime != null && (personalBest == null || personalBest.compareTo(currentTime) > 0)) {
