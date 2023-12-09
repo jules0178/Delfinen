@@ -41,7 +41,7 @@ public class Filehandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-  }
+    }
     public ArrayList<Result> loadResults() throws IOException {
         ArrayList<Result> resultsList = new ArrayList<>();
         Scanner scanner = new Scanner(new File("Results"));
