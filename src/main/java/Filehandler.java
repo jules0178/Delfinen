@@ -15,15 +15,14 @@ public class Filehandler {
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] parts = line.split(";");
-            // Check if isCompetitor is "true" in the file
             boolean isCompetitor = Boolean.parseBoolean(parts[7]);
 
             if (isCompetitor) {
                 memberArrayList.add(new Swimmer(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]),
-                        parts[4], parts[5], Boolean.parseBoolean(parts[6]), Boolean.parseBoolean(parts[7]), parts[8]));
+                        parts[4], parts[5], Boolean.parseBoolean(parts[6]), Boolean.parseBoolean(parts[7]), parts[8], Boolean.parseBoolean(parts[9])));
             } else {
                 memberArrayList.add(new Member(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]),
-                        parts[4], parts[5], Boolean.parseBoolean(parts[6]), Boolean.parseBoolean(parts[7]), parts[8]));
+                        parts[4], parts[5], Boolean.parseBoolean(parts[6]), Boolean.parseBoolean(parts[7]), parts[8], Boolean.parseBoolean(parts[9])));
             }
         }
         return memberArrayList;
@@ -34,9 +33,9 @@ public class Filehandler {
             PrintStream output = new PrintStream("Members");
             for (Member member : members) {
                 output.println(member.getName() + ";" + member.getSurName() + ";" +
-                member.getEmail() + ";" + member.getPhoneNumber() + ";" +
+                        member.getEmail() + ";" + member.getPhoneNumber() + ";" +
                         member.getDateOfBirth() + ";" + member.getDateJoined() + ";" +
-                        member.getIsActive() + ";" + member.getIsCompetitor() + ";" + member.getMemberID());
+                        member.getIsActive() + ";" + member.getIsCompetitor() + ";" + member.getMemberID() + ";" + member.getIsPaid());
             }
             output.close();
         } catch (IOException e) {
@@ -63,10 +62,10 @@ public class Filehandler {
                     Enum.valueOf(Result.SwimStyle.class, parts[3].toUpperCase()),
                     competitionTime,
                     Boolean.parseBoolean(parts[5])));
-                }
-            return resultsList;
-     }
-     public void saveResults(ArrayList<Result> resultsList){
+        }
+        return resultsList;
+    }
+    public void saveResults(ArrayList<Result> resultsList){
         try {
             PrintStream output = new PrintStream("Results");
             for (Result result : resultsList) {
@@ -77,5 +76,5 @@ public class Filehandler {
         }catch (IOException e) {
             e.printStackTrace();
         }
-     }
+    }
 }

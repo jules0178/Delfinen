@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -29,9 +30,9 @@ public class UserInterface {
 
         System.out.println("""
                 Velkommen til svømmeklubben Delfinen!
-                1. Menu til formanden
-                2. Menu til kasereren
-                3. Menu til træneren
+                1. Formanden
+                2. Kasereren
+                3. Træneren
                 9. Afslut""");
     }
     private void chairmanMenu() {
@@ -39,18 +40,21 @@ public class UserInterface {
 
         while (chairmanMenuRunning) {
             System.out.println("""
-                Velkommen til SVØMMEKLUBBEN DELFINEN.
+                Velkommen til SVØMMEKLUBBEN DELFINEN
+                ------------------------------------------------------
                 1. Tilføj nyt medlem
                 2. Vis liste over alle medlemmer
-                3. Rediger oplysninger for et medlem (Funktion ikke oprettet endnu)
+                3. Rediger oplysninger for et medlem
                 4. Slet et medlem
-                5. Søg på medlemmer (Funktion ikke oprettet endnu)
+                5. Søg på medlemmer
                 9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
                 case 1 -> addMember();
                 case 2 -> showMembers();
+                case 3 -> editMember();
                 case 4 -> deleteMember();
+                case 5 -> searchMember();
                 case 9 -> chairmanMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
@@ -62,12 +66,17 @@ public class UserInterface {
         while (treasurerMenuRunning) {
             System.out.println("""
                     Velkommen til SVØMMEKLUBBEN DELFINEN
-                    1. Se forventet indkomst i år (Funktion ikke oprettet endnu)
-                    2. Se kontingent for enkelt medlem
+                    ------------------------------------------------------
+                    1. Se Kontingent for medlem
+                    2. Se medlemmer i restance
+                    3. Se forventet indkomst i år
                     9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
-                case 2 -> selectMember();
+                case 1 -> selectMember();
+                case 2 -> membersInDebt();
+                case 3 -> {int total = controller.expectedAnnualIncome();
+                    System.out.println("Den forventet indtægt for dette år er: " + total + ",00 kr.");}
                 case 9 -> treasurerMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
@@ -265,10 +274,17 @@ public class UserInterface {
         System.out.println("Indtast medlemsID");
         String selectedMember = input.nextLine();
 
-        controller.findMemberByID(selectedMember);
+        System.out.println("Medlemmet: " + controller.findMemberByID(selectedMember));
+
+        Member m = controller.findMemberByID(selectedMember);
     }
 
 
+
+    private void membersInDebt () {
+        System.out.println("Medlemmer i restance:" + "\n");
+        controller.membersInDebt();
+    }
     private void addMember() {
         System.out.println("Hvad er fornavnet på det nye medlem?");
         String name = input.nextLine();
@@ -295,13 +311,133 @@ public class UserInterface {
         System.out.println("Er det en konkurrence svømmer?(j/n)");
         boolean isCompetitor = input.next().equalsIgnoreCase("j");
 
-        controller.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor);
+        boolean isPaid = true;
+
+        controller.addMember(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, isPaid);
         saveMembers();
+    }
+
+    private void searchMember() {
+        System.out.println("Søg efter navn eller ID: ");
+        System.out.println(controller.searchMember(input.nextLine()));
     }
 
     private void showMembers() {
         System.out.println(controller.showMembers());
     }
+    private void editMember() {
+        boolean editing = true;
+
+        while (editing) {
+            System.out.println("Indtast medlemsID for det medlem, som du vil redigere:");
+            String memberID = input.nextLine();
+            Member memberToEdit = controller.findMemberByID(memberID);
+
+            if (memberToEdit != null) {
+                boolean memberEdited = false;
+
+                while (true) {
+                    System.out.println("hvad vil du redigere?");
+                    System.out.println("1. Navn");
+                    System.out.println("2. Efternavn");
+                    System.out.println("3. Email");
+                    System.out.println("4. Telefonnummer");
+                    System.out.println("5. Fødselsdag");
+                    System.out.println("6. Aktivt medlem? (j/n)");
+                    System.out.println("7. Konkurrence svømmer? (j/n)");
+                    System.out.println("9. Vælg at gå tilbage til menuen igen");
+
+                    int choice = takeUserInput();
+
+                    switch (choice) {
+                        case 1 -> {
+                            System.out.println("Indtast nyt fornavn:");
+                            String newName = input.nextLine();
+                            memberToEdit.setName(newName);
+                            memberEdited = true;
+                        }
+                        case 2 -> {
+                            System.out.println("Indtast nyt efternavn:");
+                            String newSurName = input.nextLine();
+                            memberToEdit.setSurName(newSurName);
+                            memberEdited = true;
+                        }
+                        case 3 -> {
+                            System.out.println("Indtast ny email:");
+                            String newEmail = input.nextLine();
+                            memberToEdit.setEmail(newEmail);
+                            memberEdited = true;
+                        }
+                        case 4 -> {
+                            System.out.println("Indtast nyt telefon nummer:");
+                            int newPhoneNumber = input.nextInt();
+                            input.nextLine();
+                            memberToEdit.setPhoneNumber(newPhoneNumber);
+                            memberEdited = true;
+                        }
+                        case 5 -> {
+                            System.out.println("Indtast ny fødselsdag (dd/mm/yyyy):");
+                            String newDateOfBirth = input.nextLine();
+                            memberToEdit.setDateOfBirth(newDateOfBirth);
+                            memberEdited = true;
+                        }
+                        case 6 -> {
+                            System.out.println("Er det et aktivt medlem? (j/n)");
+                            boolean isActive = input.next().equalsIgnoreCase("j");
+                            input.nextLine();
+                            memberToEdit.setIsActive(isActive);
+                            memberEdited = true;
+                        }
+                        case 7 -> {
+                            System.out.println("Er det en konkurrence svømmer? (j/n)");
+                            boolean isCompetitor = input.next().equalsIgnoreCase("j");
+                            input.nextLine();
+                            memberToEdit.setIsCompetitor(isCompetitor);
+                            memberEdited = true;
+                        }
+                        case 9 -> {
+                            System.out.println("Du valgte at gå tilbage til menuen.");
+                            editing = false;
+                        }
+                        default -> System.out.println("Ugyldigt valg.");
+                    }
+
+                    if (memberEdited) {
+                        System.out.println("Medlemmet er redigeret!");
+                        System.out.println();
+
+                        System.out.println("Er der mere du vil redigere? (ja/nej)");
+                        String continueEditingInput = input.nextLine();
+
+                        if (continueEditingInput.equalsIgnoreCase("nej")) {
+                            System.out.println("Ingen yderligere ændringer blev foretaget. Afslutter redigering.");
+                            System.out.println();
+                            editing = false;
+                            break;
+                        } else if (!continueEditingInput.equalsIgnoreCase("ja")) {
+                            System.out.println("Ugyldigt valg. Afslutter redigering.");
+                            System.out.println();
+                            editing = false;
+                            break;
+                        }
+                    } else {
+                        System.out.println("Ingen ændringer blev foretaget.");
+                        System.out.println();
+                        break;
+                    }
+                }
+            } else {
+                System.out.println("Medlemmet med ID: " + memberID + " blev ikke fundet.");
+            }
+
+            if (editing) {
+                System.out.println("Du blev sendt tilbage til menuen.");
+                System.out.println();
+                editing = false;
+            }
+        }
+    }
+
 
     private void saveMembers() {
         controller.saveMembers();
