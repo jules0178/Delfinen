@@ -24,8 +24,8 @@ public class Member  {
 
 
     public Member (String name,String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, String memberID, boolean isPaid) {
-        this.name = name;
-        this.surName = surName;
+        this.name = capitalizeFirstLetter(name);
+        this.surName = capitalizeFirstLetter(surName);
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
@@ -35,6 +35,9 @@ public class Member  {
         this.memberID = memberID;
         this.isPaid = isPaid;
 
+    }
+    private String capitalizeFirstLetter(String word) {
+        return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
     }
     public int getAnnualFee() {
         return annualFee;
@@ -144,6 +147,10 @@ public class Member  {
 
 
     public String toString() {
+        String isActiveMember = isActive ? "Aktivt medlem" : "Inaktivt medlem";
+        String isCompetitorMember = isCompetitor ? "Ja" : "Nej";
+        String hasPaidFee = isPaid ? "Ja" : "Nej";
+
         return "Fornavn: " + name + "\n" +
                 "Efternavn: " + surName + "\n" +
                 "Alder: " + calculateAge() + "\n" +
@@ -151,10 +158,10 @@ public class Member  {
                 "Email: " + email + "\n" +
                 "Telefon nummer: " + phoneNumber + "\n" +
                 "Blev medlem d. " + dateJoined + "\n" +
-                "Er det et aktivt medlem? " + isActive + "\n" +
-                "Er det en konkurrence svømmer? " + isCompetitor + "\n" +
+                "Medlemskab: " + isActiveMember + "\n" +
+                "Konkurrence svømmer: " + isCompetitorMember + "\n" +
                 "Medlems ID: " + memberID + "\n" +
-                "Har betalt kontingent: " + isPaid;
+                "Har betalt kontingent: " + hasPaidFee;
 
 
     }
