@@ -5,14 +5,12 @@ import java.util.List;
 public class Swimmer extends Member {
 
     public List<Result> results;
-    public List<Result> practice;
     public Team team;
 
 
     public Swimmer(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, String memberID) {
         super(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, memberID);
         this.results = new ArrayList<>();
-        this.practice = new ArrayList<>();
         this.team = null;
     }
     public void setTeam(Team team) {
@@ -20,14 +18,8 @@ public class Swimmer extends Member {
     }
     public Team getTeam() {
         return team;
-
-    }    public List<Result> getPractice() {
-        return practice;
     }
 
-    public void setPractice(List<Result> practice) {
-        this.practice = practice;
-    }
     public List<Result> getResults() {
         return results;
     }
@@ -35,12 +27,17 @@ public class Swimmer extends Member {
     public void setResults(List<Result> results) {
         this.results = results;
     }
-
+    public void addResult(Result result) {
+        this.results.add(result);
+    }
     public CompetitionTime findBestTime(Result.SwimStyle style) {
         List<Result> results = this.getResults();
+        System.out.println("Finding best time for style: " + style); // Debug
+
         CompetitionTime personalBest = null;
 
         for (Result result : results) {
+
             if (result.getStyle() == style) {
                 CompetitionTime currentTime = result.getTime();
                 if (currentTime != null && (personalBest == null || personalBest.compareTo(currentTime) > 0)) {
@@ -48,6 +45,7 @@ public class Swimmer extends Member {
                 }
             }
         }
+        System.out.println("Best time found: " + personalBest); // Debug
         return personalBest;
     }
 }

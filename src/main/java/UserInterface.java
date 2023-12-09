@@ -56,7 +56,6 @@ public class UserInterface {
             }
         }
     }
-
     private void treasurerMenu() {
         boolean treasurerMenuRunning = true;
 
@@ -75,26 +74,80 @@ public class UserInterface {
         }
 
     }
-
     private void coachMenu() {
         boolean coachMenuRunning = true;
 
         while (coachMenuRunning) {
             System.out.println("""
                     Velkommen til SVØMMEKLUBBEN DELFINEN
-                    1. Se top 5 svømmere (Funktion ikke oprettet endnu)
+                    1. Se top fem svømmere for junior eller senior hold.
                     2. Tilføj stævne resultat til svømmer.
                     3. Tilføj trænings result til svømmer.
                     4. Se en svømmers resultater.
                     9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
+                case 1 -> promptDisplayTopFive();
                 case 2 -> addNewResult();
                 case 3 -> addNewPracticeResult();
                 case 4 -> displayResultPrompt();
                 case 9 -> coachMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
+        }
+    }
+    private void promptDisplayTopFive() {
+        Team team = null;
+
+        while (team == null) {
+            System.out.println("""
+                Vælg junior eller senior hold.
+                1. Junior.
+                2. Senior.
+                """);
+
+            switch (takeUserInput()) {
+                case 1 -> team = controller.getJuniorTeam();
+                case 2 -> team = controller.getSeniorTeam();
+                default -> System.out.println("Indtast venligst et gyldigt tal.");
+            }
+        }
+
+        System.out.println("Selected team: " + team.getName() + " with " + team.getMembers().size() + " members"); // Debug statement
+
+        Result.SwimStyle styleChoice = selectStyle();
+        List<Swimmer> swimmers = new ArrayList<>();
+        for (Member member : team.getMembers()) {
+            if (member instanceof Swimmer) {
+                swimmers.add((Swimmer) member);
+            }
+        }
+
+        System.out.println("Number of swimmers: " + swimmers.size()); // Debug statement
+
+        displayTopFive(swimmers, styleChoice);
+    }
+
+
+    public void displayTopFive(List<Swimmer> team, Result.SwimStyle style) {
+        List<SwimmerBestTime> swimmerTimes = new ArrayList<>();
+
+        for (Swimmer swimmer : team) {
+            CompetitionTime bestTime = swimmer.findBestTime(style);
+            if (bestTime != null) {
+                swimmerTimes.add(new SwimmerBestTime(swimmer, bestTime));
+            } else {
+                System.out.println("No best time for swimmer: " + swimmer.getName()); // Debug statement
+            }
+        }
+
+        System.out.println("Number of swimmer times: " + swimmerTimes.size()); // Debug statement
+
+        swimmerTimes.sort(Comparator.comparing(SwimmerBestTime::getBestTime));
+
+        for (int i = 0; i < Math.min(5, swimmerTimes.size()); i++) {
+            SwimmerBestTime entry = swimmerTimes.get(i);
+            System.out.println("Bedste tid opnået af " + entry.getSwimmer().getName() + ": " + entry.getBestTime() + " i " + style.getDiscipline());
         }
     }
 
@@ -119,7 +172,6 @@ public class UserInterface {
     private void addNewResult() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-
         System.out.println("Indtast medlemsID for svømmeren");
         String medlemsID = input.nextLine();
 
@@ -142,15 +194,22 @@ public class UserInterface {
         Result.SwimStyle styleChoice = selectStyle();
         displayResults(memberID, styleChoice);
     }
-    public void displayResults(String memberID, Result.SwimStyle swimStyle){
+    public void displayResults(String memberID, Result.SwimStyle swimStyle) {
         ArrayList<Result> results = controller.getResultList();
+        Member swimmer = controller.findMemberByID(memberID);
+        results.sort(Comparator.comparing(Result::getDate));
 
+        boolean matchFound = false;
         for (Result r : results) {
-            if(r.getMemberID().equalsIgnoreCase(memberID) && r.getStyle().equals(swimStyle)){
-                System.out.println(r);
+            if (r.getMemberID().equalsIgnoreCase(memberID) && r.getStyle().equals(swimStyle)) {
+                System.out.println( swimmer.getName() + r);
+                matchFound = true;
             }
         }
-        System.out.println("Intet match for dette ID");
+
+        if (!matchFound) {
+            System.out.println("Intet match for dette ID");
+        }System.out.println();//linebreak
     }
     public Result.SwimStyle selectStyle() {
         System.out.println("Vælg disciplin");

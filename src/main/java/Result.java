@@ -15,9 +15,7 @@ public class Result {
         this.swimStyle = swimStyle;
         this.time = time;
         this.isPractice = isPractice;
-
     }
-
     public String getEventName() {
         return eventName;
     }
@@ -81,8 +79,6 @@ public class Result {
 
     @Override
     public String toString() {
-        return "I " + eventName + " : d. " + date + " : " + time + " i " + swimStyle.getDiscipline();
+        return " fik i " + eventName + " d." + date + " tiden " + time + " i " + swimStyle.getDiscipline();
     }
-
-
 }

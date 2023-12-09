@@ -12,6 +12,14 @@ public class Controller {
         this.juniorTeam = new Team("Juniors");
         this.seniorTeam = new Team("Seniors");
         assignSwimmersToTeams();
+        assignResultsToSwimmers();
+    }
+    public Team getJuniorTeam() {
+        return juniorTeam;
+    }
+
+    public Team getSeniorTeam() {
+        return seniorTeam;
     }
 
     public Member findMemberByID(String memberID) {
@@ -19,7 +27,7 @@ public class Controller {
     }
     private void assignSwimmersToTeams() {
         for (Member member : database.getMembersArrayList()) {
-            if (member instanceof Swimmer) {
+            if (member instanceof Swimmer && member.getIsActive()) {
                 Swimmer swimmer = (Swimmer) member;
                 int age = swimmer.calculateAge();
                 if (age < 18) {
@@ -32,32 +40,31 @@ public class Controller {
             }
         }
     }
-    public void assignResults(String memberID) {
-        Swimmer swimmer = (Swimmer) database.findMemberByID(memberID);
-        List<Result> results = swimmer.getResults();
-        List<Result> practice = swimmer.getPractice();
+    private void assignResultsToSwimmers() {
+        List<Result> results = database.getResultList();
 
-        for (Result res : database.getResultList()) {
-            if(res.getMemberID().equalsIgnoreCase(memberID) && !res.isPractice()){
-                results.add(res);
-            } else if (res.getMemberID().equalsIgnoreCase(memberID) && res.isPractice()) {
-                practice.add(res);
+        for (Member member : database.getMembersArrayList()) {
+            if (member instanceof Swimmer) {
+                Swimmer swimmer = (Swimmer) member;
+                for (Result result : results) {
+                    if (result.getMemberID().equals(swimmer.getMemberID())) {
+                        swimmer.addResult(result);
+                    }
+                }
             }
-
         }
     }
+
+
     public void addResult(String memberID, Result result) {
         Member member = database.findMemberByID(memberID);
 
         if (member instanceof Swimmer) {
             Swimmer swimmer = (Swimmer) member;
             List<Result> results = swimmer.getResults();
-            List<Result> practice = swimmer.getPractice();
 
-            if (result.getMemberID().equalsIgnoreCase(memberID) && !result.isPractice()) {
+            if (result.getMemberID().equalsIgnoreCase(memberID)) {
                 results.add(result);
-            } else if (result.getMemberID().equalsIgnoreCase(memberID) && result.isPractice()) {
-                practice.add(result);
             }
             database.addResult(memberID, result.getEventName(), result.getDate(), result.getStyle(), result.getTime(), result.isPractice());
         } else {

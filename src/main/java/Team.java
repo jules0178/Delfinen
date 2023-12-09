@@ -2,21 +2,21 @@ import java.util.ArrayList;
 import java.util.List;
 public class Team {
     private String name;
-    private List<Member> members;
+    private List<Swimmer> swimmerList;
     public Team(String name) {
         this.name= name;
-        this.members = new ArrayList<>();
+        this.swimmerList = new ArrayList<>();
     }
     public String getName() {
         return name;
     }
-    public void addMember(Member member) {
-        members.add(member);
+    public void addMember(Swimmer member) {
+        swimmerList.add(member);
     }
-    public void removeMember(Member member) {
-        members.remove(member);
+    public void removeMember(Swimmer member) {
+        swimmerList.remove(member);
     }
-    public List<Member>getMembers() {
-        return members;
+    public List<Swimmer>getMembers() {
+        return swimmerList;
     }
 }
