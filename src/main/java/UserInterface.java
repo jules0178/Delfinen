@@ -26,28 +26,31 @@ public class UserInterface {
             }
         }
     }
+
     private void showMainMenu() {
 
         System.out.println("""
-                Velkommen til svømmeklubben Delfinen!
+                Velkommen til SVØMMEKLUBBEN DELFINEN
+                ------------------------------------------------------
                 1. Formanden
                 2. Kasereren
                 3. Træneren
                 9. Afslut""");
     }
+
     private void chairmanMenu() {
         boolean chairmanMenuRunning = true;
 
         while (chairmanMenuRunning) {
             System.out.println("""
-                Velkommen til SVØMMEKLUBBEN DELFINEN
-                ------------------------------------------------------
-                1. Tilføj nyt medlem
-                2. Vis liste over alle medlemmer
-                3. Rediger oplysninger for et medlem
-                4. Slet et medlem
-                5. Søg på medlemmer
-                9. Gå tilbage til hovedmenuen""");
+                    Velkommen til SVØMMEKLUBBEN DELFINEN
+                    ------------------------------------------------------
+                    1. Tilføj nyt medlem
+                    2. Vis liste over alle medlemmer
+                    3. Rediger oplysninger for et medlem
+                    4. Slet et medlem
+                    5. Søg på medlemmer
+                    9. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
                 case 1 -> addMember();
@@ -60,6 +63,7 @@ public class UserInterface {
             }
         }
     }
+
     private void treasurerMenu() {
         boolean treasurerMenuRunning = true;
 
@@ -75,20 +79,24 @@ public class UserInterface {
             switch (takeUserInput()) {
                 case 1 -> selectMember();
                 case 2 -> membersInDebt();
-                case 3 -> {int total = controller.expectedAnnualIncome();
-                    System.out.println("Den forventet indtægt for dette år er: " + total + ",00 kr.");}
+                case 3 -> {
+                    int total = controller.expectedAnnualIncome();
+                    System.out.println("Den forventet indtægt for dette år er: " + total + ",00 kr.");
+                }
                 case 9 -> treasurerMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
         }
 
     }
+
     private void coachMenu() {
         boolean coachMenuRunning = true;
 
         while (coachMenuRunning) {
             System.out.println("""
                     Velkommen til SVØMMEKLUBBEN DELFINEN
+                    ----------------------------------------------------
                     1. Se top fem svømmere for junior eller senior hold.
                     2. Tilføj stævne resultat til svømmer.
                     3. Tilføj trænings result til svømmer.
@@ -105,15 +113,16 @@ public class UserInterface {
             }
         }
     }
+
     private void promptDisplayTopFive() {
         Team team = null;
 
         while (team == null) {
             System.out.println("""
-                Vælg junior eller senior hold.
-                1. Junior.
-                2. Senior.
-                """);
+                    Vælg junior eller senior hold.
+                    1. Junior.
+                    2. Senior.
+                    """);
 
             switch (takeUserInput()) {
                 case 1 -> team = controller.getJuniorTeam();
@@ -171,6 +180,7 @@ public class UserInterface {
         controller.addResult(medlemsID, new Result(medlemsID, eventName, date, styleChoice, time, true));
         saveResults();
     }
+
     private void addNewResult() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -190,12 +200,14 @@ public class UserInterface {
         controller.addResult(medlemsID, new Result(medlemsID, eventName, date, styleChoice, time, false));
         saveResults();
     }
-    public void displayResultPrompt(){
+
+    public void displayResultPrompt() {
         System.out.println("Indtast medlemsID for svømmeren");
         String memberID = input.nextLine();
         Result.SwimStyle styleChoice = selectStyle();
         displayResults(memberID, styleChoice);
     }
+
     public void displayResults(String memberID, Result.SwimStyle swimStyle) {
         ArrayList<Result> results = controller.getResultList();
         Member swimmer = controller.findMemberByID(memberID);
@@ -204,15 +216,17 @@ public class UserInterface {
         boolean matchFound = false;
         for (Result r : results) {
             if (r.getMemberID().equalsIgnoreCase(memberID) && r.getStyle().equals(swimStyle)) {
-                System.out.println( swimmer.getName() + r);
+                System.out.println(swimmer.getName() + r);
                 matchFound = true;
             }
         }
 
         if (!matchFound) {
             System.out.println("Intet match for dette ID");
-        }System.out.println();//linebreak
+        }
+        System.out.println();//linebreak
     }
+
     public Result.SwimStyle selectStyle() {
         System.out.println("Vælg disciplin");
 
@@ -239,6 +253,7 @@ public class UserInterface {
             }
         }
     }
+
     private CompetitionTime promptCompetitionTime() {
         CompetitionTime time = null;
         while (time == null) {
@@ -273,11 +288,11 @@ public class UserInterface {
     }
 
 
-
-    private void membersInDebt () {
+    private void membersInDebt() {
         System.out.println("Medlemmer i restance:" + "\n");
         controller.membersInDebt();
     }
+
     private void addMember() {
         System.out.println("Hvad er fornavnet på det nye medlem?");
         String name = input.nextLine();
@@ -318,6 +333,7 @@ public class UserInterface {
     private void showMembers() {
         System.out.println(controller.showMembers());
     }
+
     private void editMember() {
         boolean editing = true;
 
@@ -436,11 +452,13 @@ public class UserInterface {
         controller.saveMembers();
         System.out.println("Alle ændringer er blevet gemt");
     }
+
     private void saveResults() {
         controller.saveResults();
         System.out.println("Alle resultater er gemt");
     }
-    private void deleteMember(){
+
+    private void deleteMember() {
         System.out.println();
         System.out.println("Indtast medlemmets ID, som du vil slette:");
         String memberID = input.nextLine();
