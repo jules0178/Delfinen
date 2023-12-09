@@ -81,7 +81,7 @@ public class Database {
     public void addMember(String name, String surName, String email, int phoneNumber, String dateOfBirth, String dateJoined, boolean isActive, boolean isCompetitor, boolean isPaid) {
         String memberID = generateMemberID(name, surName);
 
-       if (isCompetitor) {
+        if (isCompetitor) {
             Swimmer newSwimmer = new Swimmer(name, surName, email, phoneNumber, dateOfBirth, dateJoined, isActive, isCompetitor, memberID, isPaid);
             membersArrayList.add(0, newSwimmer);
         } else {
@@ -148,17 +148,17 @@ public class Database {
             return stringBuilder.toString();
         }
     }
-        public Member findMemberByID(String memberID) {
-            for (Member member : membersArrayList) {
-                if (member.getMemberID().equalsIgnoreCase(memberID)) {
-                    return member;
-                }
+    public Member findMemberByID(String memberID) {
+        for (Member member : membersArrayList) {
+            if (member.getMemberID().equalsIgnoreCase(memberID)) {
+                return member;
             }
-            return null;
         }
-
-        public void removeMember(Member member) {
-            membersArrayList.remove(member);
-
-        }
+        return null;
     }
+
+    public void removeMember(Member member) {
+        membersArrayList.remove(member);
+
+    }
+}
