@@ -40,7 +40,7 @@ public class UserInterface {
         boolean chairmanMenuRunning = true;
         while (chairmanMenuRunning) {
             System.out.println("""
-                Velkommen til SVØMMEKLUBBEN DELFINEN
+                Velkommen Til SVØMMEKLUBBEN DELFINEN
                 ------------------------------------------------------
                 1. Tilføj nyt medlem
                 2. Vis liste over alle medlemmer
