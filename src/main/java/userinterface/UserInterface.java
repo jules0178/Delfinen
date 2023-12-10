@@ -38,7 +38,6 @@ public class UserInterface {
     }
     private void chairmanMenu() {
         boolean chairmanMenuRunning = true;
-
         while (chairmanMenuRunning) {
             System.out.println("""
                 Velkommen til SVØMMEKLUBBEN DELFINEN
@@ -77,8 +76,17 @@ public class UserInterface {
             switch (takeUserInput()) {
                 case 1 -> selectMember();
                 case 2 -> membersInDebt();
-                case 3 -> {int total = controller.expectedAnnualIncome();
-                    System.out.println("Den forventet indtægt for dette år er: " + total + ",00 kr.");}
+                case 3 -> {
+                    int total = controller.expectedAnnualIncome();
+                    System.out.println("Den forventede indtægt for dette år er: " + total + ",00 kr.");
+                    int debt = controller.totalDebt();
+                    System.out.println();
+                    System.out.println("Medlemmer skylder pr d.d.: " + debt + ",00 kr.");
+                    int real = total-debt;
+                    System.out.println();
+                    System.out.println("Nettoindtægt pr. d.d.: " + real + ",00 kr.");
+                    System.out.println();
+                }
                 case 4 -> treasurerMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
@@ -110,7 +118,6 @@ public class UserInterface {
     }
     private void promptDisplayTopFive() {
         Team team = null;
-
         while (team == null) {
             System.out.println("""
                 Vælg junior eller senior hold.
