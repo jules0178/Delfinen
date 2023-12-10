@@ -1,8 +1,9 @@
+package domain_model;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 public class Member  {
     private String name;
@@ -159,7 +160,5 @@ public class Member  {
                 "Konkurrence svømmer: " + isCompetitorMember + "\n" +
                 "Medlems ID: " + memberID + "\n" +
                 "Har betalt kontingent: " + hasPaidFee;
-
-
     }
 }

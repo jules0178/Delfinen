@@ -1,5 +1,8 @@
+package domain_model;
+
+import data_source.Filehandler;
+
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -28,7 +31,7 @@ public class Database {
             int fee = getAnnualFee(member);
             boolean isPaid = member.getIsPaid();
             if (!isPaid) {
-                System.out.println("Member ID: " + member.getMemberID() +"\n" + "Navn: " + member.getName() + "\n" +
+                System.out.println("domain_model.Member ID: " + member.getMemberID() +"\n" + "Navn: " + member.getName() + "\n" +
                         "mangler at betale: " + fee + ",00 kr.");
 
             }

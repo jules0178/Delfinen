@@ -1,3 +1,5 @@
+package domain_model;
+
 public class CompetitionTime implements Comparable<CompetitionTime> {
     private int minutes;
     private int seconds;

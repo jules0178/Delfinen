@@ -1,7 +1,9 @@
+package userinterface;
+import domain_model.*;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class UserInterface {
@@ -21,7 +23,7 @@ public class UserInterface {
                 case 1 -> chairmanMenu();
                 case 2 -> treasurerMenu();
                 case 3 -> coachMenu();
-                case 9 -> exitProgram();
+                case 4 -> exitProgram();
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
         }
@@ -30,10 +32,10 @@ public class UserInterface {
 
         System.out.println("""
                 Velkommen til svømmeklubben Delfinen!
-                1. Formanden
-                2. Kasereren
-                3. Træneren
-                9. Afslut""");
+                1. Formand
+                2. Kaserer
+                3. Træner
+                4. Afslut""");
     }
     private void chairmanMenu() {
         boolean chairmanMenuRunning = true;
@@ -47,7 +49,7 @@ public class UserInterface {
                 3. Rediger oplysninger for et medlem
                 4. Slet et medlem
                 5. Søg på medlemmer
-                9. Gå tilbage til hovedmenuen""");
+                6. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
                 case 1 -> addMember();
@@ -55,7 +57,7 @@ public class UserInterface {
                 case 3 -> editMember();
                 case 4 -> deleteMember();
                 case 5 -> searchMember();
-                case 9 -> chairmanMenuRunning = false;
+                case 6 -> chairmanMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
         }
@@ -70,14 +72,14 @@ public class UserInterface {
                     1. Se Kontingent for medlem
                     2. Se medlemmer i restance
                     3. Se forventet indkomst i år
-                    9. Gå tilbage til hovedmenuen""");
+                    4. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
                 case 1 -> selectMember();
                 case 2 -> membersInDebt();
                 case 3 -> {int total = controller.expectedAnnualIncome();
                     System.out.println("Den forventet indtægt for dette år er: " + total + ",00 kr.");}
-                case 9 -> treasurerMenuRunning = false;
+                case 4 -> treasurerMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
         }
@@ -93,14 +95,14 @@ public class UserInterface {
                     2. Tilføj stævne resultat til svømmer.
                     3. Tilføj trænings result til svømmer.
                     4. Se en svømmers resultater.
-                    9. Gå tilbage til hovedmenuen""");
+                    5. Gå tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
                 case 1 -> promptDisplayTopFive();
                 case 2 -> addNewResult();
                 case 3 -> addNewPracticeResult();
                 case 4 -> displayResultPrompt();
-                case 9 -> coachMenuRunning = false;
+                case 5 -> coachMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
         }
@@ -114,11 +116,10 @@ public class UserInterface {
                 1. Junior.
                 2. Senior.
                 """);
-
             switch (takeUserInput()) {
                 case 1 -> team = controller.getJuniorTeam();
                 case 2 -> team = controller.getSeniorTeam();
-                default -> System.out.println("Indtast venligst et gyldigt tal.");
+                default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
         }
 
@@ -154,34 +155,26 @@ public class UserInterface {
     }
 
     private void addNewPracticeResult() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         System.out.println("Indtast medlemsID for svømmeren");
         String medlemsID = input.nextLine();
-
-        System.out.println("Indtast dato for træningsresultat i format: dd/MM/åååå");
-        LocalDate date = LocalDate.parse(input.nextLine(), formatter);
-
+        System.out.println("Indtast dato for træning");
+        LocalDate date = inputDate();
         Result.SwimStyle styleChoice = selectStyle();
-
         CompetitionTime time = promptCompetitionTime();
-
         String eventName = "Træning";
 
         controller.addResult(medlemsID, new Result(medlemsID, eventName, date, styleChoice, time, true));
         saveResults();
     }
     private void addNewResult() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
         System.out.println("Indtast medlemsID for svømmeren");
         String medlemsID = input.nextLine();
 
         System.out.println("Indtast titel på stævnet");
         String eventName = input.nextLine();
-
-        System.out.println("Indtast dato for stævnet i formatet dd/MM/åååå");
-        LocalDate date = LocalDate.parse(input.nextLine(), formatter);
+        System.out.println(" \n Dato for stævnet");
+        LocalDate date = inputDate();
 
         Result.SwimStyle styleChoice = selectStyle();
 
@@ -233,7 +226,7 @@ public class UserInterface {
                 System.out.println("Du har valgt: " + styleChoice.getDiscipline());
                 return styleChoice;
             } catch (NumberFormatException e) {
-                System.out.println("Indtast venligst et gyldigt tal.");
+                System.out.println("Indtast et gyldigt tal.");
             } catch (IllegalArgumentException e) {
                 System.out.println("Disciplinen findes ikke");
             }
@@ -261,8 +254,6 @@ public class UserInterface {
         }
         return time;
     }
-
-
     private void selectMember() {
         System.out.println("Indtast medlemsID");
         String selectedMember = input.nextLine();
@@ -271,37 +262,48 @@ public class UserInterface {
 
         Member m = controller.findMemberByID(selectedMember);
     }
-
-
-
+    private LocalDate inputDate(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date;
+        while (true) {
+            try {
+                System.out.println("Indtast datoen i format: dd/MM/åååå");
+                date = LocalDate.parse(input.nextLine(), formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Ugyldig dato. Prøv igen.");
+            }
+        }
+        return  date;
+    }
     private void membersInDebt () {
         System.out.println("Medlemmer i restance:" + "\n");
         controller.membersInDebt();
     }
     private void addMember() {
-        System.out.println("Hvad er fornavnet på det nye medlem?");
+        System.out.println("Indtast fornavn");
         String name = input.nextLine();
 
-        System.out.println("Hvad er deres efternavn?");
+        System.out.println("Indtast efternavn?");
         String surName = input.nextLine();
 
-        System.out.println("Hvad er deres email?");
+        System.out.println("Indtast email");
         String email = input.nextLine();
 
-        System.out.println("Hvad er deres telefon nr.?");
+        System.out.println("Indtast telefon nr.");
         int phoneNumber = input.nextInt();
         input.nextLine(); //linje til scanner bug
 
-        System.out.println("Hvornår har de fødselsdag? (dd/mm/yyyy)");
+        System.out.println("Indtast fødselsdag");
         String dateOfBirth = input.nextLine();
 
-        System.out.println("Hvornår er de blevet et medlem? (dd/mm/yyyy)");
+        System.out.println("Indtast dato for oprettelse af medlemskab");
         String dateJoined = input.nextLine();
 
-        System.out.println("Er det et aktivt medlem? (j/n)");
+        System.out.println("Aktivt medlemskab? (j/n)");
         boolean isActive = input.next().equalsIgnoreCase("j");
 
-        System.out.println("Er det en konkurrence svømmer?(j/n)");
+        System.out.println("Stævne svømmer?(j/n)");
         boolean isCompetitor = input.next().equalsIgnoreCase("j");
 
         boolean isPaid = true;
@@ -336,9 +338,9 @@ public class UserInterface {
                     System.out.println("3. Email");
                     System.out.println("4. Telefonnummer");
                     System.out.println("5. Fødselsdag");
-                    System.out.println("6. Aktivt medlem? (j/n)");
-                    System.out.println("7. Konkurrence svømmer? (j/n)");
-                    System.out.println("9. Vælg at gå tilbage til menuen igen");
+                    System.out.println("6. Aktivt medlemskab");
+                    System.out.println("7. Stævne svømmer");
+                    System.out.println("8. Tilbage til hovedmenuen");
 
                     int choice = takeUserInput();
 
@@ -382,14 +384,14 @@ public class UserInterface {
                             memberEdited = true;
                         }
                         case 7 -> {
-                            System.out.println("Er det en konkurrence svømmer? (j/n)");
+                            System.out.println("Er det en stævne svømmer? (j/n)");
                             boolean isCompetitor = input.next().equalsIgnoreCase("j");
                             input.nextLine();
                             memberToEdit.setIsCompetitor(isCompetitor);
                             memberEdited = true;
                         }
-                        case 9 -> {
-                            System.out.println("Du valgte at gå tilbage til menuen.");
+                        case 8 -> {
+                            System.out.println("Vender tilbage til menuen.");
                             editing = false;
                         }
                         default -> System.out.println("Ugyldigt valg.");
@@ -458,7 +460,7 @@ public class UserInterface {
 
     private int takeUserInput() {
         String inputString = input.nextLine();
-        int inputInt = 0;
+        int inputInt;
 
         try {
             inputInt = Integer.parseInt(inputString);

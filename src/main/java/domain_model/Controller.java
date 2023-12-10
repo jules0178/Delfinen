@@ -1,5 +1,6 @@
+package domain_model;
+
 import java.io.IOException;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +44,6 @@ public class Controller {
     }
     private void assignResultsToSwimmers() {
         List<Result> results = database.getResultList();
-
         for (Member member : database.getMembersArrayList()) {
             if (member instanceof Swimmer) {
                 Swimmer swimmer = (Swimmer) member;
@@ -67,7 +67,7 @@ public class Controller {
             }
             database.addResult(memberID, result.getEventName(), result.getDate(), result.getStyle(), result.getTime(), result.isPractice());
         } else {
-            System.out.println("Error: Member with ID " + memberID + " is not a swimmer. Cannot add result.");
+            System.out.println("Medlem med ID " + memberID + " er ikke registreret som aktiv i stævner");
         }
     }
 

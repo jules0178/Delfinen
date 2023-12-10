@@ -1,3 +1,5 @@
+package domain_model;
+
 public class SwimmerBestTime {
     private Swimmer swimmer;
     private CompetitionTime bestTime;

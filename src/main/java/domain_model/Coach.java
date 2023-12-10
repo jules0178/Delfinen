@@ -1,5 +1,5 @@
-import java.util.ArrayList;
-import java.util.Comparator;
+package domain_model;
+
 import java.util.List;
 
 public class Coach extends Member {
