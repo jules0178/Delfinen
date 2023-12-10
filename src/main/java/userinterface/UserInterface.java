@@ -68,30 +68,30 @@ public class UserInterface {
             System.out.println("""
                     Velkommen til SVØMMEKLUBBEN DELFINEN
                     ------------------------------------------------------
-                    1. Se Kontingent for medlem
+                    1. Registrér betaling for et medlem
                     2. Se medlemmer i restance
                     3. Se forventet indkomst i år
-                    4. Tilbage til hovedmenuen""");
+                    4. Tilbage til hovedmenuen
+                     """);
 
             switch (takeUserInput()) {
-                case 1 -> selectMember();
+                case 1 -> registerPayment();
                 case 2 -> membersInDebt();
                 case 3 -> {
                     int total = controller.expectedAnnualIncome();
                     System.out.println("Den forventede indtægt for dette år er: " + total + ",00 kr.");
                     int debt = controller.totalDebt();
                     System.out.println();
-                    System.out.println("Medlemmer skylder pr d.d.: " + debt + ",00 kr.");
+                    System.out.println("Medlemmer skylder pr d.d: " + debt + ",00 kr.");
                     int real = total-debt;
                     System.out.println();
-                    System.out.println("Nettoindtægt pr. d.d.: " + real + ",00 kr.");
+                    System.out.println("Årsindtægt pr. d.d: " + real + ",00 kr.");
                     System.out.println();
                 }
                 case 4 -> treasurerMenuRunning = false;
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
         }
-
     }
     private void coachMenu() {
         boolean coachMenuRunning = true;
@@ -104,7 +104,7 @@ public class UserInterface {
                     2. Tilføj stævne resultat til svømmer.
                     3. Tilføj trænings result til svømmer.
                     4. Se en svømmers resultater.
-                    5. Gå tilbage til hovedmenuen""");
+                    5. Tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
                 case 1 -> promptDisplayTopFive();
@@ -123,10 +123,14 @@ public class UserInterface {
                 Vælg junior eller senior hold.
                 1. Junior.
                 2. Senior.
+                3. Tilbage til trænermenuen.
                 """);
             switch (takeUserInput()) {
                 case 1 -> team = controller.getJuniorTeam();
                 case 2 -> team = controller.getSeniorTeam();
+                case 3-> {
+                    return;
+                }
                 default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
             }
         }
@@ -159,7 +163,45 @@ public class UserInterface {
             System.out.println("Bedste tid opnået af " + entry.getSwimmer().getName() + ": " + entry.getBestTime() + " i " + style.getDiscipline());
         }
     }
+    private void registerPayment() {
+        boolean editing = true;
 
+        while (editing) {
+            System.out.println("Indtast medlemsID for det medlem hvis betaling skal registreres");
+            String memberID = input.nextLine();
+            Member memberToEdit = controller.findMemberByID(memberID);
+
+            if (memberToEdit != null) {
+
+
+                while (true) {
+                    System.out.println("Registrer betaling for " + memberToEdit.getName() + " " + memberToEdit.getSurName() + " med ID " + memberToEdit.getMemberID());
+                    System.out.println("Årskontigent for " + memberToEdit.getName() + " på: " + memberToEdit.getAnnualFee(memberToEdit) + memberToEdit.hasPaid());
+                    System.out.println();
+                    System.out.println("1. Betaling registreret");
+                    System.out.println("2. Betaling ikke registreret");
+                    System.out.println("3. Tilbage til kaserermenuen");
+
+                    int choice = takeUserInput();
+
+                    switch (choice) {
+                        case 1 -> {
+                            memberToEdit.setIsPaid();
+                            System.out.println("Betaling blev registreret.");
+                        }
+                        case 2 -> {
+                            memberToEdit.setIsNotPaid();
+                            System.out.println("Betaling registreret som manglende");
+                        }
+                        case 3 -> {
+                            return;
+                        }
+                        default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
+                    }
+                }
+            }
+        }
+    }
     private void addNewPracticeResult() {
 
         System.out.println("Indtast medlemsID for svømmeren");

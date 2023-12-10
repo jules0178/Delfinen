@@ -37,9 +37,6 @@ public class Member  {
     private String capitalizeFirstLetter(String word) {
         return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
     }
-    public int getAnnualFee() {
-        return annualFee;
-    }
 
     public String getMemberID() {
         return memberID;
@@ -101,6 +98,12 @@ public class Member  {
     public boolean getIsPaid() {
         return isPaid;
     }
+    public void setIsPaid() {
+        isPaid = true;
+    }
+    public void setIsNotPaid(){
+        isPaid = false;
+    }
     public void setIsCompetitor (boolean isCompetitor) {
         this.isCompetitor = isCompetitor;
     }
@@ -142,7 +145,13 @@ public class Member  {
         return -1;
     }
 
+public String hasPaid(){
+        if(isPaid){
+            return ",00 kr er betalt";
 
+        }
+        else return ",00 kr er ikke betalt";
+}
 
     public String toString() {
         String isActiveMember = isActive ? "Aktivt medlem" : "Inaktivt medlem";
