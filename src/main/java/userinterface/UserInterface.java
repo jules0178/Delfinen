@@ -29,7 +29,6 @@ public class UserInterface {
         }
     }
     private void showMainMenu() {
-
         System.out.println("""
                 Velkommen til svømmeklubben Delfinen!
                 1. Formand
@@ -62,6 +61,7 @@ public class UserInterface {
             }
         }
     }
+
     private void treasurerMenu() {
         boolean treasurerMenuRunning = true;
 
@@ -72,7 +72,7 @@ public class UserInterface {
                     1. Se Kontingent for medlem
                     2. Se medlemmer i restance
                     3. Se forventet indkomst i år
-                    4. Gå tilbage til hovedmenuen""");
+                    4. Tilbage til hovedmenuen""");
 
             switch (takeUserInput()) {
                 case 1 -> selectMember();
@@ -91,6 +91,7 @@ public class UserInterface {
         while (coachMenuRunning) {
             System.out.println("""
                     Velkommen til SVØMMEKLUBBEN DELFINEN
+                    ----------------------------------------------------
                     1. Se top fem svømmere for junior eller senior hold.
                     2. Tilføj stævne resultat til svømmer.
                     3. Tilføj trænings result til svømmer.
@@ -130,12 +131,10 @@ public class UserInterface {
                 swimmers.add((Swimmer) member);
             }
         }
-
         System.out.println("Antal svømmere på holdet: " + swimmers.size());
 
         displayTopFive(swimmers, styleChoice);
     }
-
 
     public void displayTopFive(List<Swimmer> team, Result.SwimStyle style) {
         List<SwimmerBestTime> swimmerTimes = new ArrayList<>();
@@ -173,7 +172,7 @@ public class UserInterface {
 
         System.out.println("Indtast titel på stævnet");
         String eventName = input.nextLine();
-        System.out.println(" \n Dato for stævnet");
+        System.out.println("Dato for stævnet");
         LocalDate date = inputDate();
 
         Result.SwimStyle styleChoice = selectStyle();
@@ -197,14 +196,14 @@ public class UserInterface {
         boolean matchFound = false;
         for (Result r : results) {
             if (r.getMemberID().equalsIgnoreCase(memberID) && r.getStyle().equals(swimStyle)) {
-                System.out.println( swimmer.getName() + r);
+                System.out.println(swimmer.getName() + r);
                 matchFound = true;
             }
         }
-
         if (!matchFound) {
             System.out.println("Intet match for dette ID");
-        }System.out.println();//linebreak
+        }
+        System.out.println();//linebreak
     }
     public Result.SwimStyle selectStyle() {
         System.out.println("Vælg disciplin");
@@ -213,7 +212,6 @@ public class UserInterface {
         for (int i = 0; i < swimStyles.length; i++) {
             System.out.println((i + 1) + ". " + swimStyles[i].getDiscipline());
         }
-
         while (true) {
             try {
                 System.out.print("Indtast dit valg (1-" + swimStyles.length + "): ");
@@ -276,7 +274,7 @@ public class UserInterface {
         }
         return  date;
     }
-    private void membersInDebt () {
+    private void membersInDebt() {
         System.out.println("Medlemmer i restance:" + "\n");
         controller.membersInDebt();
     }
@@ -284,26 +282,26 @@ public class UserInterface {
         System.out.println("Indtast fornavn");
         String name = input.nextLine();
 
-        System.out.println("Indtast efternavn?");
+        System.out.println("Indtast efternavn");
         String surName = input.nextLine();
 
         System.out.println("Indtast email");
         String email = input.nextLine();
 
-        System.out.println("Indtast telefon nr.");
+        System.out.println("Indtast tlf.nr.");
         int phoneNumber = input.nextInt();
         input.nextLine(); //linje til scanner bug
 
-        System.out.println("Indtast fødselsdag");
+        System.out.println("Indtast fødselsdag (dd/mm/åååå)");
         String dateOfBirth = input.nextLine();
 
-        System.out.println("Indtast dato for oprettelse af medlemskab");
+        System.out.println("Indtast dato for oprettelse af medlemskab (dd/mm/åååå)");
         String dateJoined = input.nextLine();
 
-        System.out.println("Aktivt medlemskab? (j/n)");
+        System.out.println("Aktivt medlemskab (j/n)");
         boolean isActive = input.next().equalsIgnoreCase("j");
 
-        System.out.println("Stævne svømmer?(j/n)");
+        System.out.println("Stævne svømmer (j/n)");
         boolean isCompetitor = input.next().equalsIgnoreCase("j");
 
         boolean isPaid = true;
@@ -384,7 +382,7 @@ public class UserInterface {
                             memberEdited = true;
                         }
                         case 7 -> {
-                            System.out.println("Er det en stævne svømmer? (j/n)");
+                            System.out.println("Stævne svømmer? (j/n)");
                             boolean isCompetitor = input.next().equalsIgnoreCase("j");
                             input.nextLine();
                             memberToEdit.setIsCompetitor(isCompetitor);
@@ -433,7 +431,6 @@ public class UserInterface {
         }
     }
 
-
     private void saveMembers() {
         controller.saveMembers();
         System.out.println("Alle ændringer er blevet gemt");
@@ -456,7 +453,6 @@ public class UserInterface {
             System.out.println("Handling afbrudt.");
         }
     }
-
 
     private int takeUserInput() {
         String inputString = input.nextLine();
