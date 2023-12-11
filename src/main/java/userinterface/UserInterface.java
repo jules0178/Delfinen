@@ -37,7 +37,7 @@ public class UserInterface {
                 3. Træner
                 4. Afslut""");
     }
-    private void chairmanMenu() {
+        private void chairmanMenu() {
         boolean chairmanMenuRunning = true;
         while (chairmanMenuRunning) {
             System.out.println("""                              
