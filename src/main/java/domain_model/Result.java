@@ -9,14 +9,16 @@ public class Result {
     private SwimStyle swimStyle;
     private CompetitionTime time;
     private boolean isPractice;
+    private int placement;
 
-    public Result(String memberID,  String eventName, LocalDate date, SwimStyle swimStyle, CompetitionTime time, boolean isPractice){
+    public Result(String memberID,  String eventName, LocalDate date, SwimStyle swimStyle, CompetitionTime time, boolean isPractice, int placement){
         this.memberID = memberID;
         this.eventName = eventName;
         this.date = date;
         this.swimStyle = swimStyle;
         this.time = time;
         this.isPractice = isPractice;
+        this.placement = placement;
     }
     public String getEventName() {
         return eventName;
@@ -55,6 +57,9 @@ public class Result {
     public void setTime(int minutes, int seconds, int hundredths){
         this.time = time;
     }
+    public int getPlacement(){
+        return placement;
+    }
 
     public enum SwimStyle {
         BUTTERFLY("Butterfly"),
@@ -69,18 +74,14 @@ public class Result {
         public String getDiscipline() {
             return discipline;
         }
-        public static SwimStyle fromString(String disciplineName) {
-            for (SwimStyle style : SwimStyle.values()) {
-                if (style.getDiscipline().equalsIgnoreCase(disciplineName)) {
-                    return style;
-                }
-            }
-            throw new IllegalArgumentException("Svømmestilen blev ikke fundet");
-        }
     }
 
     @Override
     public String toString() {
-        return " fik i " + eventName + " d." + date + " tiden " + time + " i " + swimStyle.getDiscipline();
+        if (!isPractice) {
+            return " fik i " + eventName + " d." + date + " tiden " + time + " og placerede "+ placement + ". i " + swimStyle.getDiscipline();
+        }else{
+            return " fik d." + date + " tiden " + time + ". i " + swimStyle.getDiscipline();
+        }
     }
 }

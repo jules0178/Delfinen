@@ -65,7 +65,7 @@ public class Controller {
             if (result.getMemberID().equalsIgnoreCase(memberID)) {
                 results.add(result);
             }
-            database.addResult(memberID, result.getEventName(), result.getDate(), result.getStyle(), result.getTime(), result.isPractice());
+            database.addResult(memberID, result.getEventName(), result.getDate(), result.getStyle(), result.getTime(), result.isPractice(), result.getPlacement());
         } else {
             System.out.println("Medlem med ID " + memberID + " er ikke registreret som aktiv i stævner");
         }

@@ -18,7 +18,6 @@ public class CompetitionTime implements Comparable<CompetitionTime> {
         return new CompetitionTime(minutes, seconds, hundredths);
     }
 
-    // Constructor can be private if it's only called from within the class
     public CompetitionTime(int minutes, int seconds, int hundredths) {
         this.minutes = minutes;
         this.seconds = seconds;

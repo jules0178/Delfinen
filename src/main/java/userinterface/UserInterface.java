@@ -24,24 +24,23 @@ public class UserInterface {
                 case 2 -> treasurerMenu();
                 case 3 -> coachMenu();
                 case 4 -> exitProgram();
-                default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
+                default -> System.out.println(invalid());
             }
         }
     }
     private void showMainMenu() {
         System.out.println("""
                 Velkommen til svømmeklubben Delfinen!
+                ------------------------------------------------------
                 1. Formand
                 2. Kaserer
                 3. Træner
                 4. Afslut""");
     }
-    private void chairmanMenu() {
+        private void chairmanMenu() {
         boolean chairmanMenuRunning = true;
         while (chairmanMenuRunning) {
-            System.out.println("""
-                Velkommen Til SVØMMEKLUBBEN DELFINEN
-                ------------------------------------------------------
+            System.out.println("""                              
                 1. Tilføj nyt medlem
                 2. Vis liste over alle medlemmer
                 3. Rediger oplysninger for et medlem
@@ -56,7 +55,7 @@ public class UserInterface {
                 case 4 -> deleteMember();
                 case 5 -> searchMember();
                 case 6 -> chairmanMenuRunning = false;
-                default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
+                default -> System.out.println(invalid());
             }
         }
     }
@@ -66,8 +65,6 @@ public class UserInterface {
 
         while (treasurerMenuRunning) {
             System.out.println("""
-                    Velkommen til SVØMMEKLUBBEN DELFINEN
-                    ------------------------------------------------------
                     1. Registrér betaling for et medlem
                     2. Se medlemmer i restance
                     3. Se forventet indkomst i år
@@ -89,7 +86,7 @@ public class UserInterface {
                     System.out.println();
                 }
                 case 4 -> treasurerMenuRunning = false;
-                default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
+                default -> System.out.println(invalid());
             }
         }
     }
@@ -98,8 +95,6 @@ public class UserInterface {
 
         while (coachMenuRunning) {
             System.out.println("""
-                    Velkommen til SVØMMEKLUBBEN DELFINEN
-                    ----------------------------------------------------
                     1. Se top fem svømmere for junior eller senior hold.
                     2. Tilføj stævne resultat til svømmer.
                     3. Tilføj trænings result til svømmer.
@@ -112,7 +107,7 @@ public class UserInterface {
                 case 3 -> addNewPracticeResult();
                 case 4 -> displayResultPrompt();
                 case 5 -> coachMenuRunning = false;
-                default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
+                default -> System.out.println(invalid());
             }
         }
     }
@@ -131,7 +126,7 @@ public class UserInterface {
                 case 3-> {
                     return;
                 }
-                default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
+                default -> System.out.println(invalid());
             }
         }
 
@@ -172,8 +167,6 @@ public class UserInterface {
             Member memberToEdit = controller.findMemberByID(memberID);
 
             if (memberToEdit != null) {
-
-
                 while (true) {
                     System.out.println("Registrer betaling for " + memberToEdit.getName() + " " + memberToEdit.getSurName() + " med ID " + memberToEdit.getMemberID());
                     System.out.println("Årskontigent for " + memberToEdit.getName() + " på: " + memberToEdit.getAnnualFee(memberToEdit) + memberToEdit.hasPaid());
@@ -196,7 +189,7 @@ public class UserInterface {
                         case 3 -> {
                             return;
                         }
-                        default -> System.out.println("Ugyldigt input. Vælg et gyldigt tal fra menuen");
+                        default -> System.out.println(invalid());
                     }
                 }
             }
@@ -211,8 +204,8 @@ public class UserInterface {
         Result.SwimStyle styleChoice = selectStyle();
         CompetitionTime time = promptCompetitionTime();
         String eventName = "Træning";
-
-        controller.addResult(medlemsID, new Result(medlemsID, eventName, date, styleChoice, time, true));
+        int place = 1;
+        controller.addResult(medlemsID, new Result(medlemsID, eventName, date, styleChoice, time, true, place));
         saveResults();
     }
     private void addNewResult() {
@@ -221,6 +214,8 @@ public class UserInterface {
 
         System.out.println("Indtast titel på stævnet");
         String eventName = input.nextLine();
+        System.out.println("Indtast placering opnået");
+        int place = takeUserInput();
         System.out.println("Dato for stævnet");
         LocalDate date = inputDate();
 
@@ -228,23 +223,41 @@ public class UserInterface {
 
         CompetitionTime time = promptCompetitionTime();
 
-        controller.addResult(medlemsID, new Result(medlemsID, eventName, date, styleChoice, time, false));
+        controller.addResult(medlemsID, new Result(medlemsID, eventName, date, styleChoice, time, false, place));
         saveResults();
     }
-    public void displayResultPrompt(){
+    public void displayResultPrompt() {
         System.out.println("Indtast medlemsID for svømmeren");
         String memberID = input.nextLine();
         Result.SwimStyle styleChoice = selectStyle();
-        displayResults(memberID, styleChoice);
+
+        boolean choice = false;
+        boolean practice = false;  // Declare the variable outside the switch
+        while (!choice) {
+            System.out.println("""
+            Vælg stævne eller træning.
+            1. Stævne.
+            2. Træning.
+            3. Tilbage.
+            """);
+            switch (takeUserInput()) {
+                case 1 -> practice = false;
+                case 2 -> practice = true;
+                case 3 -> { return; }
+                default -> System.out.println(invalid());
+            }
+            choice = true;
+        }
+        displayResults(memberID, styleChoice, practice);
     }
-    public void displayResults(String memberID, Result.SwimStyle swimStyle) {
+    public void displayResults(String memberID, Result.SwimStyle swimStyle, boolean practice) {
         ArrayList<Result> results = controller.getResultList();
         Member swimmer = controller.findMemberByID(memberID);
-        results.sort(Comparator.comparing(Result::getDate));
+        results.sort(Comparator.comparing(Result::getTime));
 
         boolean matchFound = false;
         for (Result r : results) {
-            if (r.getMemberID().equalsIgnoreCase(memberID) && r.getStyle().equals(swimStyle)) {
+            if (r.getMemberID().equalsIgnoreCase(memberID) && r.getStyle().equals(swimStyle) && r.isPractice() == practice) {
                 System.out.println(swimmer.getName() + r);
                 matchFound = true;
             }
@@ -339,7 +352,7 @@ public class UserInterface {
 
         System.out.println("Indtast tlf.nr.");
         int phoneNumber = input.nextInt();
-        input.nextLine(); //linje til scanner bug
+        input.nextLine();
 
         System.out.println("Indtast fødselsdag (dd/mm/åååå)");
         String dateOfBirth = input.nextLine();
@@ -441,7 +454,7 @@ public class UserInterface {
                             System.out.println("Vender tilbage til menuen.");
                             editing = false;
                         }
-                        default -> System.out.println("Ugyldigt valg.");
+                        default -> System.out.println(invalid());
                     }
 
                     if (memberEdited) {
@@ -515,7 +528,9 @@ public class UserInterface {
         }
         return inputInt;
     }
-
+    private String invalid() {
+    return "Ugyldig indtastning." + "\n" ;
+}
     private void exitProgram() {
         saveMembers();
         uiIsRunning = false;
