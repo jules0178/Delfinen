@@ -136,8 +136,8 @@ public class Database {
         filehandler.saveMembers(membersArrayList);
     }
 
-    public void addResult(String memberID, String eventName, LocalDate date, Result.SwimStyle swimStyle, CompetitionTime time, boolean isPractice) {
-        resultList.add(new Result(memberID, eventName, date, swimStyle, time, isPractice));
+    public void addResult(String memberID, String eventName, LocalDate date, Result.SwimStyle swimStyle, CompetitionTime time, boolean isPractice, int placement) {
+        resultList.add(new Result(memberID, eventName, date, swimStyle, time, isPractice, placement));
     }
 
     public void setResultList(ArrayList<Result> list) {

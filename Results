@@ -1,40 +1,40 @@
-joda0001;DGI Senior Crawl;2023-04-09;CRAWL;1:35.87;false
-joda0001;DGI Senior Crawl;2021-04-08;CRAWL;2:12.85;false
-joda0001;DGI Senior Crawl;2022-04-09;CRAWL;2:35.89;false
-joda0001;DGI Senior Crawl;2020-04-08;CRAWL;3:12.53;false
-joda0001;DM Langbane - Åben klasse 2020;2020-06-22;BUTTERFLY;2:50.33;false
-joda0001;DM Kortbane 2020;2020-07-15;BACK_CRAWL;1:25.88;false
-joda0001;Taastrup Efterårsstævne 2020;2020-10-05;BREASTSTROKE;2:12.79;false
-maje0002;DGI Senior Crawl;2023-04-09;CRAWL;1:45.67;false
-maje0002;DM Langbane - Åben klasse 2020;2020-06-22;BUTTERFLY;2:55.40;false
-maje0002;Taastrup Efterårsstævne 2020;2020-10-05;BREASTSTROKE;2:20.85;false
-frni0003;DGI Senior Crawl;2021-04-08;CRAWL;2:10.32;false
-frni0003;DM Kortbane 2020;2020-07-15;BACK_CRAWL;1:30.21;false
-lara0004;DM Langbane - Åben klasse 2020;2020-06-22;BUTTERFLY;2:58.47;false
-lara0004;Taastrup Efterårsstævne 2020;2020-10-05;BREASTSTROKE;2:25.63;false
-sokr0005;DGI Senior Crawl;2022-04-09;CRAWL;2:37.89;false
-sokr0005;DM Kortbane 2020;2020-07-15;BACK_CRAWL;1:35.54;false
-emla0006;DGI Senior Crawl;2020-04-08;CRAWL;3:12.53;false
-emla0006;Taastrup Efterårsstævne 2020;2020-10-05;BREASTSTROKE;2:15.79;false
-noal0007;DGI Senior Crawl;2023-04-09;CRAWL;1:42.56;false
-noal0007;DM Langbane - Åben klasse 2020;2020-06-22;BUTTERFLY;2:52.34;false
-ayma0008;DGI Senior Crawl;2021-04-08;CRAWL;2:08.47;false
-ayma0008;DM Kortbane 2020;2020-07-15;BACK_CRAWL;1:28.99;false
-lama0001;DM Kortbane 2020;2020-07-15;BACK_CRAWL;1:26.32;false
-lama0001;DGI Senior Crawl;2023-04-09;CRAWL;1:39.58;false
-lama0001;Taastrup Efterårsstævne 2020;2020-10-05;BREASTSTROKE;2:17.45;false
-ansy0009;DGI Senior Crawl;2023-04-09;CRAWL;1:48.12;false
-ansy0009;DM Langbane - Åben klasse 2020;2020-06-22;BUTTERFLY;2:57.30;false
-idmo0010;DM Kortbane 2020;2020-07-15;BACK_CRAWL;1:31.77;false
-idmo0010;Taastrup Efterårsstævne 2020;2020-10-05;BREASTSTROKE;2:18.22;false
-yuia0011;DGI Senior Crawl;2021-04-08;CRAWL;2:13.67;false
-yuia0011;DGI Senior Crawl;2022-04-09;CRAWL;2:36.89;false
-chwa0012;DM Langbane - Åben klasse 2020;2020-06-22;BUTTERFLY;2:53.56;false
-chwa0012;DGI Senior Crawl;2020-04-08;CRAWL;3:10.53;false
-elro0013;DGI Senior Crawl;2023-04-09;CRAWL;1:47.89;false
-elro0013;DM Kortbane 2020;2020-07-15;BACK_CRAWL;1:33.45;false
-isch0014;Taastrup Efterårsstævne 2020;2020-10-05;BREASTSTROKE;2:19.79;false
-isch0014;DM Langbane - Åben klasse 2020;2020-06-22;BUTTERFLY;2:54.34;false
-jobr0001;Træning;2023-02-22;BUTTERFLY;1:22.79;true
-jobr0001;Beach Brawn 2021;2021-07-07;CRAWL;2:00.99;false
-jobr0001;Hornbæk Strand Langbane;2019-06-01;CRAWL;1:59.75;false
+joda0001;DGI Senior Crawl;2023-04-09;CRAWL;1:35.87;false;1
+joda0001;DGI Senior Crawl;2021-04-08;CRAWL;2:12.85;false;1
+joda0001;DGI Senior Crawl;2022-04-09;CRAWL;2:35.89;false;1
+joda0001;DGI Senior Crawl;2020-04-08;CRAWL;3:12.53;false;1
+joda0001;DM Langbane - Åben klasse 2020;2020-06-22;BUTTERFLY;2:50.33;false;1
+joda0001;DM Kortbane 2020;2020-07-15;BACK_CRAWL;1:25.88;false;1
+joda0001;Taastrup Efterårsstævne 2020;2020-10-05;BREASTSTROKE;2:12.79;false;1
+maje0002;DGI Senior Crawl;2023-04-09;CRAWL;1:45.67;false;1
+maje0002;DM Langbane - Åben klasse 2020;2020-06-22;BUTTERFLY;2:55.40;false;1
+maje0002;Taastrup Efterårsstævne 2020;2020-10-05;BREASTSTROKE;2:20.85;false;1
+frni0003;DGI Senior Crawl;2021-04-08;CRAWL;2:10.32;false;1
+frni0003;DM Kortbane 2020;2020-07-15;BACK_CRAWL;1:30.21;false;1
+lara0004;DM Langbane - Åben klasse 2020;2020-06-22;BUTTERFLY;2:58.47;false;1
+lara0004;Taastrup Efterårsstævne 2020;2020-10-05;BREASTSTROKE;2:25.63;false;1
+sokr0005;DGI Senior Crawl;2022-04-09;CRAWL;2:37.89;false;1
+sokr0005;DM Kortbane 2020;2020-07-15;BACK_CRAWL;1:35.54;false;1
+emla0006;DGI Senior Crawl;2020-04-08;CRAWL;3:12.53;false;1
+emla0006;Taastrup Efterårsstævne 2020;2020-10-05;BREASTSTROKE;2:15.79;false;1
+noal0007;DGI Senior Crawl;2023-04-09;CRAWL;1:42.56;false;1
+noal0007;DM Langbane - Åben klasse 2020;2020-06-22;BUTTERFLY;2:52.34;false;1
+ayma0008;DGI Senior Crawl;2021-04-08;CRAWL;2:08.47;false;1
+ayma0008;DM Kortbane 2020;2020-07-15;BACK_CRAWL;1:28.99;false;1
+lama0001;DM Kortbane 2020;2020-07-15;BACK_CRAWL;1:26.32;false;1
+lama0001;DGI Senior Crawl;2023-04-09;CRAWL;1:39.58;false;1
+lama0001;Taastrup Efterårsstævne 2020;2020-10-05;BREASTSTROKE;2:17.45;false;1
+ansy0009;DGI Senior Crawl;2023-04-09;CRAWL;1:48.12;false;1
+ansy0009;DM Langbane - Åben klasse 2020;2020-06-22;BUTTERFLY;2:57.30;false;1
+idmo0010;DM Kortbane 2020;2020-07-15;BACK_CRAWL;1:31.77;false;1
+idmo0010;Taastrup Efterårsstævne 2020;2020-10-05;BREASTSTROKE;2:18.22;false;1
+yuia0011;DGI Senior Crawl;2021-04-08;CRAWL;2:13.67;false;1
+yuia0011;DGI Senior Crawl;2022-04-09;CRAWL;2:36.89;false;1
+chwa0012;DM Langbane - Åben klasse 2020;2020-06-22;BUTTERFLY;2:53.56;false;1
+chwa0012;DGI Senior Crawl;2020-04-08;CRAWL;3:10.53;false;1
+elro0013;DGI Senior Crawl;2023-04-09;CRAWL;1:47.89;false;1
+elro0013;DM Kortbane 2020;2020-07-15;BACK_CRAWL;1:33.45;false;1
+isch0014;Taastrup Efterårsstævne 2020;2020-10-05;BREASTSTROKE;2:19.79;false;1
+isch0014;DM Langbane - Åben klasse 2020;2020-06-22;BUTTERFLY;2:54.34;false;1
+jobr0001;Træning;2023-02-22;BUTTERFLY;1:22.79;true;1
+jobr0001;Beach Brawn 2021;2021-07-07;CRAWL;2:00.99;false;1
+jobr0001;Hornbæk Strand Langbane;2019-06-01;CRAWL;1:59.75;false;1

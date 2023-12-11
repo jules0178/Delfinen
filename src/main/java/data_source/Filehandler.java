@@ -65,7 +65,7 @@ public class Filehandler {
                     LocalDate.parse(parts[2]),
                     Enum.valueOf(Result.SwimStyle.class, parts[3].toUpperCase()),
                     competitionTime,
-                    Boolean.parseBoolean(parts[5])));
+                    Boolean.parseBoolean(parts[5]), Integer.parseInt(parts[6])));
         }
         return resultsList;
     }
@@ -74,7 +74,7 @@ public class Filehandler {
             PrintStream output = new PrintStream("Results");
             for (Result result : resultsList) {
                 output.println(result.getMemberID() + ";" + result.getEventName() + ";" + result.getDate() + ";" + result.getStyle() + ";" +
-                        result.getTime() + ";" +  result.isPractice());
+                        result.getTime() + ";" +  result.isPractice() + ";" + result.getPlacement());
             }
             output.close();
         }catch (IOException e) {
